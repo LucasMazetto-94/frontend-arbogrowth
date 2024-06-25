@@ -1,17 +1,20 @@
-import "./App.css";
-import Home from "./Components/home/home";
+import React from "react";
 import Header from "./Components/header";
 import Footer from "./Components/footer";
+import { BrowserRouter } from "react-router-dom";
+import MinhasRotas from "./Routes";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <div className="container-fluid" style={{ height: "400px" }}>
-        <Home />
+    <BrowserRouter>
+      <div>
+        <Header />
+        <div>
+          <MinhasRotas />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
 

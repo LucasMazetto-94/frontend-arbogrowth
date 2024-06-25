@@ -1,3 +1,4 @@
+import "./Header.css";
 import React, { useState } from "react";
 import {
   Navbar,
@@ -7,10 +8,6 @@ import {
   NavbarBrand,
   NavbarToggler,
   Collapse,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/images/logo-correta.png";
@@ -18,36 +15,51 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [shopDropdownOpen, setShopDropdownOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-  const toggleShopDropdown = () => setShopDropdownOpen(!shopDropdownOpen);
 
   return (
-    <Navbar color="dark" dark expand="md" className="text-muted fs-11 p-2">
-      <NavbarBrand href="#" style={{ display: "flex", alignItems: "center" }}>
+    <Navbar
+      color="dark"
+      dark
+      expand="md"
+      className="text-muted fs-11 p-3 fixed-top"
+    >
+      <NavbarBrand
+        className="d-flex align-items-center ms-5"
+        style={{ marginRight: "200px" }}
+        href="#"
+      >
         <img
-          className="rounded ms-5"
+          className="rounded "
           src={logo}
-          style={{ width: "80px", height: "40px" }}
+          style={{ width: "100px", height: "50px" }}
         />
       </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
-        <Nav className="m-auto" navbar>
+        <Nav
+          className="fw-bolder w-50 justify-content-around ms-5 me-5"
+          style={{ fontSize: "18px" }}
+          navbar
+        >
           <NavItem>
-            <NavLink href="#">Home</NavLink>
+            <NavLink href="/">Home</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="about.html">Sobre</NavLink>
+            <NavLink href="/sobre">Sobre</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="about.html">Produtos</NavLink>
+            <NavLink href="/produtos">Produtos</NavLink>
           </NavItem>
         </Nav>
-        <Nav navbar className="me-5">
+        <Nav
+          className="d-flex justify-content-end"
+          style={{ marginLeft: "150px" }}
+          navbar
+        >
           <NavItem>
-            <NavLink href="cart.html">
+            <NavLink href="/carrinho">
               <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
             </NavLink>
           </NavItem>

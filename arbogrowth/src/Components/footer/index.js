@@ -1,12 +1,11 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer = () => {
   return (
     <footer className="footer-area bg-dark text-muted mb-0">
       <div className="container d-flex justify-content-between">
-        <Row>
+        <Row className="mt-3 mb-3">
           <Col xxl={4} xl={4} lg={4} md={6}>
             <div className="footer-box about-widget">
               <h2 className="widget-title" style={{ color: "#6c757d" }}>
