@@ -1,163 +1,150 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import TeamMember1 from "../../assets/images/users/avatar-12.png";
-import TeamMember2 from "../../assets/images/users/avatar-13.png";
-import TeamMember3 from "../../assets/images/users/avatar-14.png";
-import TeamMember4 from "../../assets/images/users/avatar-15.png";
-import ImageFundo from "../../assets/images/home.png";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Sobre = () => {
   return (
-    <div className="page-content">
+    <div>
       {/* Hero Section */}
-      <div
-        className="hero-area hero-bg"
-        style={{
-          backgroundImage: `url(${ImageFundo})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          height: "650px", // Ajuste conforme necessário
-        }}
-      >
-        <Container>
-          <Row className="justify-content-center text-center">
-            <Col lg="8">
-              <div className="hero-text text-white">
+      <div className="breadcrumb-section breadcrumb-bg">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 offset-lg-2 text-center">
+              <div className="breadcrumb-text">
+                <p>Um pouco de nosso trabalho</p>
                 <h1>Sobre Nós</h1>
-                <p className="subtitle">Conheça nossa história e missão</p>
               </div>
-            </Col>
-          </Row>
-        </Container>
+            </div>
+          </div>
+        </div>
       </div>
-
       {/* Sobre Section */}
-      <div className="sobre-section pt-5 pb-5">
-        <Container>
-          <Row>
-            <Col md="6">
-              <h2>Nossa História</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-              <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum.
-              </p>
-            </Col>
-            <Col md="6">
-              <h2>Nossa Missão</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-              <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum.
-              </p>
-            </Col>
-          </Row>
-        </Container>
+      <div className="feature-bg">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6 feature-content">
+              <h2 className="pb-3">
+                Por quê <span className="text-success">Arbogrowth</span>
+              </h2>
+              <div className="row">
+                <div className="col-12">
+                  <h2>Nosso Compromisso</h2>
+                  <p>
+                    Bem-vindo à Arbo Growth, sua fonte confiável para produtos e
+                    cursos especializados em cuidados com árvores, jardins e
+                    solo. Nosso compromisso é fornecer soluções de alta
+                    qualidade para entusiastas e profissionais da arboricultura
+                    e do manejo ambiental.
+                  </p>
+                  <h2>Nossa Missão</h2>
+                  <p>
+                    Nossa missão é promover a saúde e a longevidade das árvores,
+                    cuidado geral com plantas e jardins e a vitalidade do solo,
+                    oferecendo produtos inovadores e conhecimento técnico de
+                    ponta. Acreditamos que com os recursos certos, qualquer
+                    pessoa pode contribuir para um ambiente mais verde e
+                    sustentável.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Equipe Section */}
-      <div className="equipe-section pt-5 pb-5">
-        <Container>
-          <h2 className="text-center mb-5">Nossa Equipe</h2>
-          <Row>
-            <Col lg="3" md="6" className="mb-4">
-              <div className="team-member">
-                <img src={TeamMember1} alt="Team Member" />
-                <div className="team-member-info">
-                  <h3>João Silva</h3>
-                  <p>CEO</p>
-                  <div className="team-member-social">
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "linkedin"]} />
-                    </a>
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "twitter"]} />
-                    </a>
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "facebook"]} />
-                    </a>
-                  </div>
-                </div>
+      <div className="mt-150">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 offset-lg-2 text-center">
+              <div className="section-title">
+                <h3>
+                  Nosso <span className="text-success">Time</span>
+                </h3>
+                <p>
+                  Contamos com profissionais preparados para tirar suas duvidas
+                  e oferecer os melhores produtos do mercado.
+                </p>
               </div>
-            </Col>
-            <Col lg="3" md="6" className="mb-4">
-              <div className="team-member">
-                <img src={TeamMember2} alt="Team Member" />
-                <div className="team-member-info">
-                  <h3>Maria Santos</h3>
-                  <p>Marketing Manager</p>
-                  <div className="team-member-social">
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "linkedin"]} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-4 col-md-6">
+              <div className="single-team-item">
+                <div className="team-bg team-bg-1"></div>
+                <h4>
+                  Jimmy Doe <span>Farmer</span>
+                </h4>
+                <ul className="social-link-team">
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="ri-facebook-line"></i>
                     </a>
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "twitter"]} />
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="ri-linkedin-line"></i>
                     </a>
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "facebook"]} />
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="ri-instagram-line"></i>
                     </a>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               </div>
-            </Col>
-            <Col lg="3" md="6" className="mb-4">
-              <div className="team-member">
-                <img src={TeamMember3} alt="Team Member" />
-                <div className="team-member-info">
-                  <h3>Pedro Oliveira</h3>
-                  <p>Operations Manager</p>
-                  <div className="team-member-social">
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "linkedin"]} />
+            </div>
+            <div className="col-lg-4 col-md-6">
+              <div className="single-team-item">
+                <div className="team-bg team-bg-2"></div>
+                <h4>
+                  Marry Doe <span>Farmer</span>
+                </h4>
+                <ul className="social-link-team">
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="ri-facebook-line"></i>
                     </a>
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "twitter"]} />
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="ri-linkedin-line"></i>
                     </a>
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "facebook"]} />
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="ri-instagram-line"></i>
                     </a>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               </div>
-            </Col>
-            <Col lg="3" md="6" className="mb-4">
-              <div className="team-member">
-                <img src={TeamMember4} alt="Team Member" />
-                <div className="team-member-info">
-                  <h3>Ana Costa</h3>
-                  <p>Customer Support</p>
-                  <div className="team-member-social">
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "linkedin"]} />
+            </div>
+            <div className="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
+              <div className="single-team-item">
+                <div className="team-bg team-bg-3"></div>
+                <h4>
+                  Simon Joe <span>Farmer</span>
+                </h4>
+                <ul className="social-link-team">
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="ri-facebook-line"></i>
                     </a>
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "twitter"]} />
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="ri-linkedin-line"></i>
                     </a>
-                    <a href="#">
-                      <FontAwesomeIcon icon={["fab", "facebook"]} />
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="ri-instagram-line"></i>
                     </a>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               </div>
-            </Col>
-          </Row>
-        </Container>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

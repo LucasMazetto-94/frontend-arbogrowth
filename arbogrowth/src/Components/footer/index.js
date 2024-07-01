@@ -1,77 +1,79 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Col, Container, Row } from "reactstrap";
+
+// Import Images
+import logolight from "../../assets/images/logo-correta.png";
 
 const Footer = () => {
   return (
-    <footer className="footer-area bg-dark text-muted mb-0">
-      <div className="container d-flex justify-content-between">
-        <Row className="mt-3 mb-3">
-          <Col xxl={4} xl={4} lg={4} md={6}>
-            <div className="footer-box about-widget">
-              <h2 className="widget-title" style={{ color: "#6c757d" }}>
-                Sobre nós
-              </h2>
-              <p style={{ color: "#6c757d" }}>
-                Acreditamos que o manejo adequado das é essencial para o sucesso
-                do cultivo. Por isso, dedicamo-nos a oferecer produtos e
-                serviços que promovam a saúde e a produtividade do seu cultivo.
+    <React.Fragment>
+      <div className="footer-area">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 col-md-6">
+              <div className="footer-box about-widget">
+                <h2 className="widget-title">Sobre Nós</h2>
+                <p>
+                  Ut enim ad minim veniam perspiciatis unde omnis iste natus
+                  error sit voluptatem accusantium doloremque laudantium, totam
+                  rem aperiam, eaque ipsa quae.
+                </p>
+              </div>
+            </div>
+            <div className="col-lg-9 col-md-6"></div>
+          </div>
+        </div>
+      </div>
+
+      <div className="copyright">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6 col-md-12">
+              <p>
+                Copyrights &copy; 2019 -{" "}
+                <a href="https://imransdesign.com/">Imran Hossain</a>, All
+                Rights Reserved.
+                <br />
+                Distributed By -{" "}
+                <a href="https://themewagon.com/">Themewagon</a>
               </p>
             </div>
-          </Col>
-          <Col xxl={4} xl={4} lg={4} md={12}>
-            <div className="footer-box pages">
-              <h2
-                className="widget-title text-center"
-                style={{ color: "#6c757d" }}
-              >
-                Redes Sociais
-              </h2>
-              <ul
-                className="mt-4 d-flex list-unstyled justify-content-between me-5 ms-5"
-                style={{ color: "#6c757d" }}
-              >
-                <li className="me-2">
-                  <i
-                    className="lab la-facebook"
-                    style={{ fontSize: "30px" }}
-                  ></i>
-                </li>
-                <li className="me-2">
-                  <i
-                    className="lab la-instagram"
-                    style={{ fontSize: "30px" }}
-                  ></i>
-                </li>
-                <li className="me-2">
-                  <i
-                    className="lab la-linkedin-in"
-                    style={{ fontSize: "30px" }}
-                  ></i>
-                </li>
-                <li className="me-2">
-                  <i
-                    className="lab la-twitter"
-                    style={{ fontSize: "30px" }}
-                  ></i>
-                </li>
-              </ul>
+            <div className="col-lg-6 text-right col-md-12">
+              <div className="social-icons">
+                <ul>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="fab fa-facebook-f"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="fab fa-twitter"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="fab fa-instagram"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="fab fa-linkedin"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i className="fab fa-dribbble"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </Col>
-          <Col xxl={3} xl={3} lg={3} md={6}>
-            <div className="footer-box get-in-touch text-center">
-              <h2 className="widget-title" style={{ color: "#6c757d" }}>
-                Entre em contato
-              </h2>
-              <ul className="list-unstyled" style={{ color: "#6c757d" }}>
-                <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                <li>suporte@arbogrowth.com.br</li>
-                <li>+55 (19)-99193-9339</li>
-              </ul>
-            </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
-    </footer>
+    </React.Fragment>
   );
 };
 

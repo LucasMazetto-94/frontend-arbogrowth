@@ -1,0 +1,90 @@
+/* Estilo para a seção de produtos */
+.Product {
+  padding: 100px; 
+  background-color: #f8f9fa; /* Fundo claro para contraste */
+}
+
+h1 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  color: #343a40;
+  margin-bottom: 40px;
+}
+
+.product-category {
+  margin-bottom: 40px;
+}
+
+.product-category h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #343a40;
+  margin-bottom: 20px;
+}
+
+.product-cards {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.product-card {
+  flex: 0 0 auto;
+  width: 200px;
+  margin-right: 20px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.product-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #343a40;
+  margin: 10px;
+}
+
+/* Estilos adicionais para a rolagem suave */
+.product-cards::-webkit-scrollbar {
+  height: 8px;
+}
+
+.product-cards::-webkit-scrollbar-thumb {
+  background-color: #ced4da;
+  border-radius: 8px;
+}
+
+.product-cards::-webkit-scrollbar-track {
+  background-color: #e9ecef;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .product-card {
+    width: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-card {
+    width: 120px;
+  }
+
+  .product-category h2 {
+    font-size: 24px;
+  }
+}
