@@ -197,9 +197,9 @@ const Home = () => {
                   cultivo de plantas, tanto espécies arbóreas quanto para o
                   menejo de jardins domésticos ou cultivos agrícolas
                 </p>
-                <a href="about.html" className="btn btn-success mt-4">
+                <Link to="/sobre" className="btn btn-success mt-4">
                   Saiba mais
-                </a>
+                </Link>
               </div>
             </div>
           </div>
