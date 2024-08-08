@@ -1,0 +1,110 @@
+/* Estilos do Modal */
+.modal {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .modal-dialog {
+    max-width: 800px;
+  }
+  
+  .modal-content {
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    overflow: hidden;
+  }
+  
+  .modal-header, .modal-footer {
+    border-bottom: 1px solid #232a35;
+  }
+  
+  .modal-header {
+    border-bottom: none;
+  }
+  
+  .modal-title {
+    font-size: 24px;
+    color: #F28123;
+  }
+  
+  .close {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #F28123;
+    cursor: pointer;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #232a35;
+    padding-top: 15px;
+  }
+  
+  .modal-footer button {
+    background-color: #012738;
+    color: #F28123;
+    border: 1px solid #F28123;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .modal-footer button:hover {
+    background-color: #F28123;
+    color: #051922;
+  }
+  
+  
+  
+  .modal-footer .btn-primary:hover {
+    background-color: #f59d53;
+  }
+  
+  .nav-pills .nav-link.active {
+    background-color: #F28123;
+    border: none;
+  }
+  
+  .nav-pills .nav-link {
+    background-color: #012738;
+    border: 1px solid #F28123;
+    color: #F28123;
+    cursor: pointer;
+  }
+  
+  .nav-pills .nav-link:hover {
+    background-color: #f59d53;
+    color: #051922;
+  }
+  
+  /* Form Inputs */
+
+  
+ 
+  /* Card */
+  .card {
+    background-color: #012738;
+    border: 1px solid #232a35;
+  }
+  
+  .card-header {
+    background-color: #0a3b52;
+    color: #F28123;
+  }
+  
+  .card-body {
+    background-color: #012738;
+    color: #fff;
+  }
+  
+  .card-footer {
+    background-color: #0a3b52;
+    color: #F28123;
+  }
+  

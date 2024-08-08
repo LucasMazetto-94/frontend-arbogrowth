@@ -1362,7 +1362,7 @@ html {
   
   ----------------------------------------------------------------------------- */
   .hero-bg {
-    background-image: url(./assets/images/clients/header_teste.png);
+    background-image: url(./assets/images/logo.jpeg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1405,6 +1405,7 @@ html {
     text-transform: uppercase;
     letter-spacing: 7px;
     font-size: 15px;
+    margin-right: 95px;
   }
   
   .hero-text h1 {
@@ -1412,6 +1413,7 @@ html {
     font-weight: 700;
     line-height: 1.3;
     color: #fff;
+    margin-right: 95px;
   }
   
   .hero-area div {
@@ -1421,11 +1423,13 @@ html {
   .hero-area div.hero-text {
     height: 100%;
     width: 100%;
+    
   }
   
   .hero-area div.hero-text-tablecell {
     height: auto;
     vertical-align: middle;
+    
   }
   
   .hero-area div.hero-text-tablecell div {
@@ -1435,6 +1439,7 @@ html {
   
   .hero-btns {
     margin-top: 35px;
+    margin-right: 105px;
   }
   
   .hero-btns a.bordered-btn {
@@ -1562,14 +1567,14 @@ html {
   
   .list-box .content h3 {
     display: block;
-    line-height: 22px;
+    line-height: 30px;
     font-size: 18px;
     margin-bottom: 4px;
   }
   
   .list-box .content p {
     margin-bottom: 0px;
-    opacity: 0.75;
+    opacity: 1;
   }
   
   .list-box .list-icon i {
@@ -2417,12 +2422,14 @@ html {
   .product-image {
     padding: 30px;
     padding-bottom: 0;
+   
   }
   
   .product-image img {
     width: 90%;
     border-radius: 5px;
     margin-bottom: 20px;
+    
   }
   
   .single-product-item h3 {
@@ -2553,7 +2560,7 @@ html {
   }
   
   td.product-image img {
-    max-width: 50px;
+    width: 50px;
     -webkit-box-shadow: none;
     box-shadow: none;
     margin-bottom: 0;
@@ -2764,4 +2771,90 @@ html {
     vertical-align: middle;
     width: 100%;
   }
-  
+
+  /* Estilo para os botões de incremento e decremento de quantidade */
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-buttons button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background-color: #012738;
+  color: #F28123;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.quantity-buttons button:hover {
+  background-color: #F28123;
+  color: #012738;
+}
+
+.quantity-buttons input {
+  width: 50px;
+  height: 36px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 1rem;
+  font-family: "Open Sans", sans-serif;
+  margin: 0 5px;
+}
+
+.quantity-buttons input:focus {
+  outline: none;
+  border-color: #F28123;
+}
+
+.shipping-options {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.shipping-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.shipping-option:last-child {
+  border-bottom: none;
+}
+
+.shipping-option input[type="radio"] {
+  margin-right: 15px;
+}
+
+.shipping-option img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-right: 15px;
+}
+
+.shipping-option label {
+  flex-grow: 1;
+  font-size: 16px;
+}
+
+.shipping-option .shipping-cost {
+  font-weight: bold;
+  color: #333;
+}
+

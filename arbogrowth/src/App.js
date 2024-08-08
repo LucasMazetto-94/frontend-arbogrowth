@@ -1,21 +1,21 @@
 import React from "react";
 import "./App.css";
-import Header from "./Components/header";
-import Footer from "./Components/footer";
 import { BrowserRouter } from "react-router-dom";
 import MinhasRotas from "./Routes";
+import CartProvider from "./Context/cart";
+import ScrollToTop from "./Components/ScrollToTop";
+import { AuthProvider } from "./Context/authContext"; // Importe o AuthProvider
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div>
-          <Header />
-          <div>
+        <AuthProvider>
+          <ScrollToTop />
+          <CartProvider>
             <MinhasRotas />
-          </div>
-          <Footer />
-        </div>
+          </CartProvider>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

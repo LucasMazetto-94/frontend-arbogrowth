@@ -1,20 +1,41 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShippingFast,
   faPhoneVolume,
   faPersonChalkboard,
-  FaPlay,
 } from "@fortawesome/free-solid-svg-icons";
-import Product1 from "../../assets/images/produto_destaque_11.jpeg";
-import Product2 from "../../assets/images/produto_destaque_2.jpeg";
-import Product3 from "../../assets/images/produto_destaque_3.jpeg";
+
 import beifort from "../../assets/images/clients/beifort_logo.png";
 import nutriplant from "../../assets/images/clients/nutriplant_logo.png";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../Context/cart";
 
 const Home = () => {
+  const [data, setData] = useState([]);
+  const { addProductsCart } = useContext(CartContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/produtos");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+        const selectedProduto = result.result.slice(0, 3);
+        setData(selectedProduto);
+
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       {/* Hero Section */}
@@ -42,13 +63,13 @@ const Home = () => {
       </div>
 
       {/* Benefits Section */}
-      <div className="list-section pt-80 pb-80">
+      <div className="list-section pt-80 pb-50">
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
               <div className="list-box d-flex justify-content-start align-items-center">
                 <div className="list-icon">
-                  <FontAwesomeIcon icon={faShippingFast} size="2x" />
+                  <FontAwesomeIcon icon={faShippingFast} size="3x" />
                 </div>
                 <div className="content ms-3">
                   <h3>Entragas</h3>
@@ -59,7 +80,7 @@ const Home = () => {
             <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
               <div className="list-box d-flex justify-content-center align-items-center">
                 <div className="list-icon">
-                  <FontAwesomeIcon icon={faPhoneVolume} size="2x" />
+                  <FontAwesomeIcon icon={faPhoneVolume} size="3x" />
                 </div>
                 <div className="content ms-3">
                   <h3>Suporte</h3>
@@ -73,7 +94,7 @@ const Home = () => {
             <div className="col-lg-4 col-md-6">
               <div className="list-box d-flex justify-content-end align-items-center">
                 <div className="list-icon">
-                  <FontAwesomeIcon icon={faPersonChalkboard} size="2x" />
+                  <FontAwesomeIcon icon={faPersonChalkboard} size="3x" />
                 </div>
                 <div className="content ms-3">
                   <h3>Parcerias</h3>
@@ -103,48 +124,34 @@ const Home = () => {
           </div>
 
           <div className="row">
-            <div className="col-lg-4 col-md-6 text-center">
-              <div className="single-product-item">
-                <div className="product-image">
-                  <a href="single-product.html">
-                    <img src={Product1} alt="" />
-                  </a>
+            {data.map((item, index) => (
+              <div className="col-lg-4 col-md-6 text-center" key={index}>
+                <div className="single-product-item">
+                  <div className="product-image">
+                    <a href="single-product.html">
+                      <img src={item.imagem} alt="" />
+                    </a>
+                  </div>
+                  <h3>{item.nome}</h3>
+                  <p className="product-price">
+                    R${" "}
+                    {item.valor.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
+                  <Link
+                    to="/carrinho"
+                    className="btn btn-success"
+                    onClick={() => {
+                      addProductsCart(item);
+                    }}
+                  >
+                    <i className="fas fa-shopping-cart"></i> Comprar
+                  </Link>
                 </div>
-                <h3>Radiocolare</h3>
-                <p className="product-price">R$ 85</p>
-                <a href="cart.html" className="btn btn-success">
-                  <i className="fas fa-shopping-cart"></i> Comprar
-                </a>
               </div>
-            </div>
-            <div className="col-lg-4 col-md-6 text-center">
-              <div className="single-product-item">
-                <div className="product-image">
-                  <a href="single-product.html">
-                    <img src={Product2} alt="" />
-                  </a>
-                </div>
-                <h3>Vitalle</h3>
-                <p className="product-price">R$ 70</p>
-                <a href="cart.html" className="btn btn-success">
-                  <i className="fas fa-shopping-cart"></i> Comprar
-                </a>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-              <div className="single-product-item">
-                <div className="product-image">
-                  <a href="single-product.html">
-                    <img src={Product3} alt="" />
-                  </a>
-                </div>
-                <h3>Florata</h3>
-                <p className="product-price">R$ 35</p>
-                <a href="cart.html" className="btn btn-success">
-                  <i className="fas fa-shopping-cart"></i> Comprar
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -197,9 +204,9 @@ const Home = () => {
                   cultivo de plantas, tanto espécies arbóreas quanto para o
                   menejo de jardins domésticos ou cultivos agrícolas
                 </p>
-                <Link to="/sobre" className="btn btn-success mt-4">
+                <a href="/sobre" className="btn btn-success mt-4">
                   Saiba mais
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -209,23 +216,23 @@ const Home = () => {
       <section className="py-5 bg-secondary position-relative mt-5 pt-5">
         <div className="bg-overlay bg-overlay-pattern opacity-50"></div>
         <Container>
-          <Row className="align-items-center gy-4">
-            <Col className="col-sm">
+          <Row className="align-items-center gy-4 justify-content-center">
+            <Col className="col-auto">
               <div>
                 <h2 className="text-white mb-0 fw-semibold text-center">
                   Conheça os produtos de maior qualidade no mercado
                 </h2>
               </div>
             </Col>
-            <Col className="col-sm-auto">
+            <Col className="col-auto">
               <div>
                 <Link
-                  to="/1.envato.market/velzon-admin"
+                  to="https://wa.me/5519991939339"
                   target="_blank"
                   className="btn bg-gradient btn-lg btn-success"
                 >
-                  <i className="ri-shopping-cart-2-line align-middle me-1"></i>{" "}
-                  Comprar Agora
+                  <i className="ri-whatsapp-line align-middle me-1"></i>{" "}
+                  WHATSAPP
                 </Link>
               </div>
             </Col>

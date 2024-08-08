@@ -1,6 +1,93 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { CartContext } from "../../Context/cart";
+import { Link } from "react-router-dom";
+import ModalCompra from "./modalCompra";
 
 const Carrinho = () => {
+  const {
+    productsCart,
+    removeProductsCart,
+    updateProductQuantity,
+    limparCarrinho,
+  } = useContext(CartContext);
+  const [cep, setCep] = useState("");
+  const [shippingOptions, setShippingOptions] = useState([]);
+  const [selectedShipping, setSelectedShipping] = useState(null);
+  const [shipping, setShipping] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleIncreaseQuantity = (product) => {
+    updateProductQuantity(product.id, product.quantity + 1);
+  };
+
+  const handleDecreaseQuantity = (product) => {
+    if (product.quantity > 1) {
+      updateProductQuantity(product.id, product.quantity - 1);
+    } else {
+      removeProductsCart(product.id);
+    }
+  };
+
+  const handleCalculoFrete = async (e) => {
+    e.preventDefault();
+    console.log(productsCart);
+
+    const listaCompras = productsCart.map((item) => ({
+      id: item.id,
+      nome: item.nome,
+      quantity: item.quantity,
+      valor: item.valor,
+      altura: item.altura,
+      largura: item.largura,
+      comprimento: item.comprimento,
+      peso: item.peso,
+    }));
+
+    const payload = {
+      cepDestino: cep,
+      produtos: listaCompras,
+    };
+    console.log(payload);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/calcular_frete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setShippingOptions(data); // Ajuste conforme a resposta da API
+      } else {
+        alert(`Erro ao calcular frete: ${data.error}`);
+      }
+    } catch (error) {
+      console.error("Erro ao calcular frete:", error);
+      alert("Erro interno ao calcular frete.");
+    }
+
+    setCep("");
+  };
+
+  const handleShippingChange = (option) => {
+    setSelectedShipping(option);
+    console.log(selectedShipping);
+    setShipping(option.custom_price);
+    const subtotal = productsCart.reduce(
+      (acc, product) => acc + product.valor * product.quantity,
+      0
+    );
+    setTotal(parseFloat(subtotal) + parseFloat(option.custom_price));
+  };
+
   return (
     <div>
       <div className="breadcrumb-section breadcrumb-bg">
@@ -15,128 +102,196 @@ const Carrinho = () => {
           </div>
         </div>
       </div>
-      <div class="cart-section mt-150 mb-150">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 col-md-12">
-              <div class="cart-table-wrap">
-                <table class="cart-table">
-                  <thead class="cart-table-head">
-                    <tr class="table-head-row">
-                      <th class="product-remove"></th>
-                      <th class="product-image">Product Image</th>
-                      <th class="product-name">Name</th>
-                      <th class="product-price">Price</th>
-                      <th class="product-quantity">Quantity</th>
-                      <th class="product-total">Total</th>
+      <div className="cart-section mt-150 mb-150">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 col-md-12">
+              <div className="cart-table-wrap">
+                <table className="cart-table">
+                  <thead className="cart-table-head">
+                    <tr className="table-head-row">
+                      <th className="product-remove"></th>
+                      <th className="product-image">Imagem</th>
+                      <th className="product-name">Nome</th>
+                      <th className="product-price">Preço</th>
+                      <th className="product-quantity">Quantidade</th>
+                      <th className="product-total">Total</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="table-body-row">
-                      <td class="product-remove">
-                        <a href="#">
-                          <i class="far fa-window-close"></i>
-                        </a>
-                      </td>
-                      <td class="product-image">
-                        <img
-                          src="assets/img/products/product-img-1.jpg"
-                          alt=""
-                        />
-                      </td>
-                      <td class="product-name">Strawberry</td>
-                      <td class="product-price">$85</td>
-                      <td class="product-quantity">
-                        <input type="number" placeholder="0" />
-                      </td>
-                      <td class="product-total">1</td>
-                    </tr>
-                    <tr class="table-body-row">
-                      <td class="product-remove">
-                        <a href="#">
-                          <i class="far fa-window-close"></i>
-                        </a>
-                      </td>
-                      <td class="product-image">
-                        <img
-                          src="assets/img/products/product-img-2.jpg"
-                          alt=""
-                        />
-                      </td>
-                      <td class="product-name">Berry</td>
-                      <td class="product-price">$70</td>
-                      <td class="product-quantity">
-                        <input type="number" placeholder="0" />
-                      </td>
-                      <td class="product-total">1</td>
-                    </tr>
-                    <tr class="table-body-row">
-                      <td class="product-remove">
-                        <a href="#">
-                          <i class="far fa-window-close"></i>
-                        </a>
-                      </td>
-                      <td class="product-image">
-                        <img
-                          src="assets/img/products/product-img-3.jpg"
-                          alt=""
-                        />
-                      </td>
-                      <td class="product-name">Lemon</td>
-                      <td class="product-price">$35</td>
-                      <td class="product-quantity">
-                        <input type="number" placeholder="0" />
-                      </td>
-                      <td class="product-total">1</td>
-                    </tr>
+                    {productsCart.map((product) => (
+                      <tr className="table-body-row" key={product.id}>
+                        <td className="product-remove">
+                          <i
+                            className="ri-subtract-fill"
+                            onClick={() => removeProductsCart(product.id)}
+                          ></i>
+                        </td>
+                        <td className="product-image">
+                          <img src={product.imagem} alt={product.nome} />
+                        </td>
+                        <td className="product-name">{product.nome}</td>
+                        <td className="product-price">R$ {product.valor}</td>
+                        <td className="product-quantity">
+                          <div className="quantity-buttons">
+                            <button
+                              onClick={() => handleDecreaseQuantity(product)}
+                            >
+                              -
+                            </button>
+                            <input
+                              className="m-0 text-end form-control-sm" // Classes adicionadas
+                              type="number"
+                              value={product.quantity}
+                              readOnly
+                            />
+                            <button
+                              onClick={() => handleIncreaseQuantity(product)}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                        <td className="product-total">
+                          R$ {product.valor * product.quantity}
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
             </div>
 
-            <div class="col-lg-4">
-              <div class="total-section">
-                <table class="total-table">
-                  <thead class="total-table-head">
-                    <tr class="table-total-row">
+            <div className="col-lg-4">
+              <div className="total-section">
+                <table className="total-table">
+                  <thead className="total-table-head">
+                    <tr className="table-total-row">
                       <th>Total</th>
-                      <th>Price</th>
+                      <th>Preço</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="total-data">
+                    <tr className="total-data">
                       <td>
                         <strong>Subtotal: </strong>
                       </td>
-                      <td>$500</td>
+                      <td>
+                        R${" "}
+                        {productsCart.reduce(
+                          (acc, product) =>
+                            acc + product.valor * product.quantity,
+                          0
+                        )}
+                      </td>
                     </tr>
-                    <tr class="total-data">
+                    <tr className="total-data">
                       <td>
                         <strong>Shipping: </strong>
                       </td>
-                      <td>$45</td>
+                      <td>R$ {productsCart.length === 0 ? 0 : shipping}</td>
                     </tr>
-                    <tr class="total-data">
+                    <tr className="total-data">
                       <td>
                         <strong>Total: </strong>
                       </td>
-                      <td>$545</td>
+                      <td>R$ {productsCart.length === 0 ? 0 : total}</td>
                     </tr>
                   </tbody>
                 </table>
-                <div class="cart-buttons">
-                  <a href="cart.html" class="boxed-btn">
-                    Update Cart
-                  </a>
-                  <a href="checkout.html" class="boxed-btn black">
-                    Check Out
-                  </a>
+                <div className="checkout-accordion-wrap mt-2">
+                  <div className="accordion" id="accordionExample">
+                    <div className="card single-accordion">
+                      <div className="card-header" id="headingOne">
+                        <h5 className="mb-0">
+                          <button className="btn btn-link" type="button">
+                            Calcular Frete
+                          </button>
+                        </h5>
+                      </div>
+
+                      <div className="collapse show">
+                        <div className="card-body">
+                          <div className="billing-address-form">
+                            <form action="index.html">
+                              <p>
+                                <input
+                                  type="text"
+                                  placeholder="CEP Destino"
+                                  value={cep}
+                                  onChange={(e) => setCep(e.target.value)}
+                                />
+                              </p>
+                              <a
+                                href=""
+                                className="boxed-btn d-flex justify-content-center"
+                                onClick={handleCalculoFrete}
+                              >
+                                Calcular
+                              </a>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {shippingOptions.length > 0 && (
+                  <div className="shipping-options">
+                    <h4>Opções de Frete:</h4>
+                    {productsCart.length === 0
+                      ? []
+                      : shippingOptions.map((option) => (
+                          <div key={option.id} className="shipping-option">
+                            <input
+                              type="radio"
+                              name="shippingOption"
+                              value={option.id}
+                              onChange={() => handleShippingChange(option)}
+                            />
+                            <img
+                              src={option.company.picture}
+                              alt={option.company.name}
+                            />
+                            <label className="fw-bold">{option.name}</label>
+                            <div className="shipping-cost">
+                              {!option.custom_price
+                                ? "Indiponível"
+                                : `R$  ${option.custom_price}`}
+                            </div>
+                          </div>
+                        ))}
+                  </div>
+                )}
+
+                <div className="cart-buttons">
+                  <Link
+                    href=""
+                    className="boxed-btn"
+                    onClick={shippingOptions.length <= 0 ? "" : toggle}
+                    disabled={shippingOptions.length <= 0 ? true : false}
+                  >
+                    Finalizar
+                  </Link>
+                  <Link to="/produtos" className="boxed-btn black">
+                    Continuar Comprando
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <ModalCompra
+        toggle={toggle}
+        show={isOpen}
+        limparCarrinho={limparCarrinho}
+        cartData={productsCart}
+        shippingId={selectedShipping ? selectedShipping.id : null}
+        shippingName={selectedShipping ? selectedShipping.company.name : ""}
+        total={total}
+      />
     </div>
   );
 };

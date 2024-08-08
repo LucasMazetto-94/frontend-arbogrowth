@@ -1,27 +1,94 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Col, Container, Row } from "reactstrap";
-
-// Import Images
-import logolight from "../../assets/images/logo-correta.png";
-
 const Footer = () => {
   return (
     <React.Fragment>
       <div className="footer-area">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-12">
               <div className="footer-box about-widget">
                 <h2 className="widget-title">Sobre Nós</h2>
                 <p>
-                  Ut enim ad minim veniam perspiciatis unde omnis iste natus
-                  error sit voluptatem accusantium doloremque laudantium, totam
-                  rem aperiam, eaque ipsa quae.
+                  Somos a Arbogrowth e nos dedicamos ao cuidado das suas plantas
+                  para criar um mundo mais saudável e sustentável, onde a
+                  natureza prospera. Cultive conosco.
                 </p>
+                <div className="social-icons">
+                  <ul className="sub-menu">
+                    <li>
+                      <a href="#" target="_blank">
+                        <i className="fab fa-facebook-f"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" target="_blank">
+                        <i className="ri-instagram-fill"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" target="_blank">
+                        <i className="ri-facebook-circle-fill"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" target="_blank">
+                        <i className="ri-youtube-fill"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" target="_blank">
+                        <i className="ri-whatsapp-fill"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-            <div className="col-lg-9 col-md-6"></div>
+            <div className="col-lg-5 col-md-12 d-flex justify-content-center">
+              <div className="footer-box">
+                <h2 className="widget-title mb-3">Links Úteis</h2>
+                <div>
+                  <ul>
+                    <li>
+                      <a href="/">Home</a>
+                    </li>
+                    <li>
+                      <a href="/sobre">Sobre Nós</a>
+                    </li>
+                    <li>
+                      <a href="/produtos">Produtos</a>
+                    </li>
+                    <li>
+                      <a href="https://wa.me/5519991939339">Contato</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-12">
+              <div className="footer-box">
+                <h2 className="widget-title">Contatos</h2>
+                <ul>
+                  <li>
+                    <p>
+                      <i className="ri-map-pin-fill"></i>Seu endereço aqui
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <i className="ri-phone-fill"></i>+55 (11) 99999-9999
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <i className="ri-mail-open-fill"></i>
+                      contato@arbogrowth.com
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -31,44 +98,11 @@ const Footer = () => {
           <div className="row">
             <div className="col-lg-6 col-md-12">
               <p>
-                Copyrights &copy; 2019 -{" "}
-                <a href="https://imransdesign.com/">Imran Hossain</a>, All
-                Rights Reserved.
+                Copyrights &copy; 2024 -{" "}
+                <a href="https://imransdesign.com/">Lucas Mazetto</a>, Feito com
+                ❤️
                 <br />
-                Distributed By -{" "}
-                <a href="https://themewagon.com/">Themewagon</a>
               </p>
-            </div>
-            <div className="col-lg-6 text-right col-md-12">
-              <div className="social-icons">
-                <ul>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i className="fab fa-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i className="fab fa-instagram"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i className="fab fa-linkedin"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" target="_blank">
-                      <i className="fab fa-dribbble"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>

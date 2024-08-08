@@ -1,0 +1,58 @@
+/* Login.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Faz o contêiner ocupar toda a altura da tela */
+  background-color: #f8f9fa; /* Cor de fundo suave para toda a página */
+}
+
+.login-container .row {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #155724; /* Dark Green */
+}
+
+.login-container label {
+  color: #6c757d; /* Gray */
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745; /* Bootstrap Success Green */
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.login-container button:hover {
+  background-color: #218838; /* Darker Green */
+}
+
+.login-container .error-message {
+  color: #dc3545; /* Bootstrap Danger Red */
+  margin-bottom: 10px;
+}
+
+.login-container .logo {
+  max-width: 100px; /* Smaller size */
+  margin-bottom: 20px;
+}

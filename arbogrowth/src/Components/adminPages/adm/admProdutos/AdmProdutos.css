@@ -1,0 +1,51 @@
+/* AdmProdutos.css */
+.adm-produtos-container {
+    padding: 20px;
+  }
+  
+  .adm-produtos-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .adm-produtos-table th, .adm-produtos-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .adm-produtos-table th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  .adm-produtos-table td {
+    text-align: center;
+  }
+  
+  .adm-produtos-table td img {
+    max-width: 25px; /* Defina um tamanho máximo para a imagem */
+    max-height: 25px; /* Defina uma altura máxima para a imagem */
+  }
+  
+  .adm-produtos-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .adm-produtos-add-button {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #28a745; /* Bootstrap Success Green */
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    justify-content: end;
+  }
+  
+  .adm-produtos-add-button:hover {
+    background-color: #218838; /* Darker Green */
+  }

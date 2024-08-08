@@ -4,3 +4,29 @@
     width: 100%;
     z-index: 1030;
   }
+  .navbar {
+    justify-content: center;
+  }
+  
+  .navbar-brand {
+    margin-right: 0; /* Remove margem direita */
+  }
+  
+  .navbar-nav {
+    flex-direction: row;
+    gap: 20px; /* Espaçamento entre itens da navbar */
+  }
+  
+  .navbar-toggler {
+    margin-left: auto;
+  }
+  
+  .navbar-collapse {
+    justify-content: center;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem; /* Ajuste o espaçamento interno */
+  }
+
+  

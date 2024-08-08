@@ -10,7 +10,7 @@ import {
   Collapse,
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logo from "../../assets/images/logo-correta.png";
+import logo from "../../assets/images/logo-correta-1.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = () => {
@@ -41,7 +41,7 @@ const Header = () => {
       <Navbar
         style={{
           background: scrolled ? "rgba(0, 0, 0, 0.8)" : "transparent", // Cor escura com opacidade
-          transition: "background-color 0.3s ease", // Suaviza a transição
+          transition: "background-color 0.3s ease",
         }}
         dark
         expand="md"
@@ -53,7 +53,7 @@ const Header = () => {
           href="#"
         >
           <img
-            className="rounded "
+            className="rounded ms-4"
             src={logo}
             style={{ width: "100px", height: "50px" }}
           />
@@ -61,22 +61,22 @@ const Header = () => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav
-            className="fw-bolder w-50 justify-content-around ms-5 me-5"
+            className="fw-bolder w-50 justify-content-around"
             style={{ fontSize: "18px" }}
             navbar
           >
             <NavItem>
-              <NavLink className={scrolled ? "" : "text-dark"} href="/">
+              <NavLink className="text-white" href="/">
                 Home
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className={scrolled ? "" : "text-dark"} href="/sobre">
+              <NavLink className="text-white" href="/sobre">
                 Sobre
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className={scrolled ? "" : "text-dark"} href="/produtos">
+              <NavLink className="text-white" href="/produtos">
                 Produtos
               </NavLink>
             </NavItem>
@@ -87,7 +87,11 @@ const Header = () => {
             navbar
           >
             <NavItem>
-              <NavLink className="text-white" href="/carrinho">
+              <NavLink
+                className="text-white"
+                href="/carrinho"
+                onClick={console.log("NavLink to carrinho")}
+              >
                 <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
               </NavLink>
             </NavItem>

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { CartContext } from "../../Context/cart";
 import "./Produtos.css";
 
 const Produtos = () => {
   const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
   const [categoria, setCategoria] = useState([]);
   const [categoriaAtiva, setCategoriaAtiva] = useState("");
+  const { addProductsCart } = useContext(CartContext);
 
   const handleClickCategoria = (categoria) => {
     setCategoriaAtiva(categoria);
@@ -23,7 +25,7 @@ const Produtos = () => {
         setCategoria(result.result);
         console.log(result);
       } catch (error) {
-        setError(error.message);
+        console.log(error);
       }
     };
 
@@ -82,21 +84,31 @@ const Produtos = () => {
                   (item) =>
                     categoriaAtiva === "" || item.categoria === categoriaAtiva
                 )
-                .map((item, index) => (
-                  <div key={index} className="col-lg-4 col-md-6 text-center">
+                .map((item) => (
+                  <div key={item.id} className="col-lg-4 col-md-6 text-center">
                     <div className="single-product-item">
                       <div className="product-image">
-                        <a href="single-product.html">
+                        <a href="">
                           <img src={item.imagem} alt={item.nome} />
                         </a>
                       </div>
                       <h3>{item.nome}</h3>
                       <p className="product-price">
-                        <span>250ml</span> R$ {item.valor}
+                        <span>250ml</span> R${" "}
+                        {item.valor.toLocaleString("pt-BR", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
                       </p>
-                      <a href="cart.html" className="cart-btn">
-                        <i className="fas fa-shopping-cart"></i> Add to Cart
-                      </a>
+                      <Link
+                        to="/carrinho"
+                        className="cart-btn"
+                        onClick={() => {
+                          addProductsCart(item);
+                        }}
+                      >
+                        <i className="fas fa-shopping-cart"></i> Comprar
+                      </Link>
                     </div>
                   </div>
                 ))}
