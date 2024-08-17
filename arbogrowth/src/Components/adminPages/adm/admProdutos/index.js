@@ -6,8 +6,21 @@ import ModalNovoProduto from "./ModalNovoProduto";
 const AdmProdutos = () => {
   const [produtos, setProdutos] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
   const toggle = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleItem = (item) => {
+    setSelectedItem(item);
+    console.log(item);
+    toggle();
+  };
+
+  const handleNoItem = () => {
+    setSelectedItem({});
+
+    toggle();
   };
 
   const fetchData = useCallback(async () => {
@@ -32,7 +45,7 @@ const AdmProdutos = () => {
       <Card>
         <CardHeader className="d-flex justify-content-between align-items-center">
           <h5 className="mb-0">Produtos</h5>
-          <Button color="success" size="sm" onClick={toggle}>
+          <Button color="success" size="sm" onClick={handleNoItem}>
             +
           </Button>
         </CardHeader>
@@ -54,6 +67,7 @@ const AdmProdutos = () => {
               <th>Comprimento</th>
               <th>Peso</th>
               <th>Imagem</th>
+              <th>Ativo</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -74,16 +88,25 @@ const AdmProdutos = () => {
                     className="produto-imagem"
                   />
                 </td>
+                <td>{item.ativo === 1 ? "Ativo" : "Inativo"}</td>
                 <td className="adm-produtos-actions">
-                  <i className="ri-delete-bin-line"></i>
-                  <i className="ri-pencil-line"></i>
+                  <i
+                    style={{ cursor: "pointer" }}
+                    className="ri-pencil-line"
+                    onClick={() => handleItem(item)}
+                  ></i>
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
       </Card>
-      <ModalNovoProduto modal={isOpen} toggle={toggle} />
+      <ModalNovoProduto
+        modal={isOpen}
+        toggle={toggle}
+        item={selectedItem}
+        buscarProdutos={fetchData}
+      />
     </div>
   );
 };

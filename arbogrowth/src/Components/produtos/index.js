@@ -76,13 +76,13 @@ const Produtos = () => {
               </div>
             </div>
           </div>
-
           <div className="row product-lists">
             {data.length > 0 &&
               data
                 .filter(
                   (item) =>
-                    categoriaAtiva === "" || item.categoria === categoriaAtiva
+                    item.ativo === 1 &&
+                    (categoriaAtiva === "" || item.categoria === categoriaAtiva)
                 )
                 .map((item) => (
                   <div key={item.id} className="col-lg-4 col-md-6 text-center">

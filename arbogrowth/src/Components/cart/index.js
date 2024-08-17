@@ -73,8 +73,6 @@ const Carrinho = () => {
       console.error("Erro ao calcular frete:", error);
       alert("Erro interno ao calcular frete.");
     }
-
-    setCep("");
   };
 
   const handleShippingChange = (option) => {

@@ -1,9 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 
 export default function CartProvider({ children }) {
-  const [productsCart, setProductsCart] = useState([]);
+  const [productsCart, setProductsCart] = useState(() => {
+    // Carrega o carrinho do localStorage ao inicializar
+    const storedCart = localStorage.getItem("productsCart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+
+  useEffect(() => {
+    // Salva o carrinho no localStorage sempre que ele é atualizado
+    localStorage.setItem("productsCart", JSON.stringify(productsCart));
+  }, [productsCart]);
 
   function addProductsCart(product) {
     setProductsCart((prevProducts) => {
@@ -35,6 +44,7 @@ export default function CartProvider({ children }) {
   }
   function limparCarrinho() {
     setProductsCart([]);
+    localStorage.removeItem("productsCart"); // Limpa o carrinho do localStorage
   }
 
   return (

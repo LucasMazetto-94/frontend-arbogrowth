@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { loadMercadoPago } from "@mercadopago/sdk-js"; // Import do SDK
+import { Spinner } from "reactstrap";
 
 const CheckoutButton = ({ total, onStatusCompra }) => {
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const initializeCardForm = async () => {
       await loadMercadoPago();
@@ -58,6 +59,7 @@ const CheckoutButton = ({ total, onStatusCompra }) => {
             console.log("Form mounted");
           },
           onSubmit: async (event) => {
+            setIsLoading(true);
             event.preventDefault();
 
             const {
@@ -98,10 +100,12 @@ const CheckoutButton = ({ total, onStatusCompra }) => {
               );
 
               const result = await response.json();
+              setIsLoading(false);
               onStatusCompra(result);
               console.log(result); // Verificar o status da compra
             } catch (error) {
               console.error("Erro ao processar o pagamento:", error);
+              setIsLoading(false);
               onStatusCompra(error);
             }
           },
@@ -124,40 +128,56 @@ const CheckoutButton = ({ total, onStatusCompra }) => {
 
   return (
     <>
-      <style>
-        {`
-    #form-checkout {
-      display: flex;
-      flex-direction: column;
+      {isLoading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "start",
+            marginTop: "100px",
+            height: "100vh",
+          }}
+        >
+          <Spinner color="primary" />
+        </div>
+      ) : (
+        <>
+          <style>
+            {`
+            #form-checkout {
+              display: flex;
+              flex-direction: column;
+            }
+        
+            .container {
+              height: 18px;
+              display: inline-block;
+              border: 1px solid rgb(118, 118, 118);
+              border-radius: 2px;
+              padding: 1px 2px;
+            }
+            `}
+          </style>
+          <form id="form-checkout">
+            <div id="form-checkout__cardNumber" className="container"></div>
+            <div id="form-checkout__expirationDate" className="container"></div>
+            <div id="form-checkout__securityCode" className="container"></div>
+            <input type="text" id="form-checkout__cardholderName" />
+            <select id="form-checkout__issuer"></select>
+            <select id="form-checkout__installments"></select>
+            <select id="form-checkout__identificationType"></select>
+            <input type="text" id="form-checkout__identificationNumber" />
+            <input type="email" id="form-checkout__cardholderEmail" />
 
-    }
-
-    .container {
-      height: 18px;
-      display: inline-block;
-      border: 1px solid rgb(118, 118, 118);
-      border-radius: 2px;
-      padding: 1px 2px;
-    }`}
-      </style>
-      <form id="form-checkout">
-        <div id="form-checkout__cardNumber" className="container"></div>
-        <div id="form-checkout__expirationDate" className="container"></div>
-        <div id="form-checkout__securityCode" className="container"></div>
-        <input type="text" id="form-checkout__cardholderName" />
-        <select id="form-checkout__issuer"></select>
-        <select id="form-checkout__installments"></select>
-        <select id="form-checkout__identificationType"></select>
-        <input type="text" id="form-checkout__identificationNumber" />
-        <input type="email" id="form-checkout__cardholderEmail" />
-
-        <button type="submit" id="form-checkout__submit">
-          Pagar
-        </button>
-        <progress value="0" className="progress-bar">
-          Carregando...
-        </progress>
-      </form>
+            <button type="submit" id="form-checkout__submit">
+              Pagar
+            </button>
+            <progress value="0" className="progress-bar">
+              Carregando...
+            </progress>
+          </form>
+        </>
+      )}
     </>
   );
 };

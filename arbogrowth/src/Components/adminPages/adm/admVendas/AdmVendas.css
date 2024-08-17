@@ -1,0 +1,38 @@
+/* AdmVendas.css */
+.adm-vendas-container {
+    padding: 20px;
+  }
+  
+  .adm-vendas-container p {
+    /* Aqui você define os estilos que deseja aplicar aos parágrafos */
+    color: #333;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    font-weight: bolder;
+  }
+  .adm-vendas-container span {
+    /* Aqui você define os estilos que deseja aplicar aos parágrafos */
+    color: #333;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+    font-weight: normal;
+  }
+
+  .venda-card {
+    height: 100%; /* Faz com que o card ocupe toda a altura da coluna */
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .venda-card .card-header,
+  .venda-card .card-footer {
+    flex-shrink: 0;
+  }
+  
+  .venda-card .simplebar-content-wrapper {
+    flex-grow: 1; /* Faz com que o SimpleBar ocupe o espaço restante no card */
+  }

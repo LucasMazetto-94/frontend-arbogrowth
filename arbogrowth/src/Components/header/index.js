@@ -1,5 +1,5 @@
 import "./Header.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Navbar,
   Nav,
@@ -12,10 +12,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../assets/images/logo-correta-1.png";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { CartContext } from "../../Context/cart";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { productsCart } = useContext(CartContext);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -55,6 +57,7 @@ const Header = () => {
           <img
             className="rounded ms-4"
             src={logo}
+            alt=""
             style={{ width: "100px", height: "50px" }}
           />
         </NavbarBrand>
@@ -87,12 +90,25 @@ const Header = () => {
             navbar
           >
             <NavItem>
-              <NavLink
-                className="text-white"
-                href="/carrinho"
-                onClick={console.log("NavLink to carrinho")}
-              >
-                <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
+              <NavLink className="text-white" href="/carrinho">
+                <div className="position-relative">
+                  <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
+                  {productsCart.length >= 1 && (
+                    <span
+                      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                      style={{
+                        fontSize: "0.75rem",
+                        width: "1.0rem",
+                        height: "1.0rem",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {productsCart.length}
+                    </span>
+                  )}
+                </div>
               </NavLink>
             </NavItem>
             <NavItem>

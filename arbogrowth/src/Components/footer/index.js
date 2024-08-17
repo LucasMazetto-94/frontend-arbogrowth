@@ -22,7 +22,10 @@ const Footer = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="#" target="_blank">
+                      <a
+                        href="https://www.instagram.com/arbogrowth?igsh=MnVxMXJkaDU2am5n"
+                        target="_blank"
+                      >
                         <i className="ri-instagram-fill"></i>
                       </a>
                     </li>
@@ -37,7 +40,7 @@ const Footer = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="#" target="_blank">
+                      <a href="https://wa.me/5519991939339" target="_blank">
                         <i className="ri-whatsapp-fill"></i>
                       </a>
                     </li>
@@ -72,7 +75,8 @@ const Footer = () => {
                 <ul>
                   <li>
                     <p>
-                      <i className="ri-map-pin-fill"></i>Seu endereço aqui
+                      <i className="ri-map-pin-fill"></i> Rua Miguel Speranza,
+                      51, Quadra C lote 3, Jardim Valença, Valinhos/SP
                     </p>
                   </li>
                   <li>
@@ -83,7 +87,7 @@ const Footer = () => {
                   <li>
                     <p>
                       <i className="ri-mail-open-fill"></i>
-                      contato@arbogrowth.com
+                      Arbogrowth@gmail.com
                     </p>
                   </li>
                 </ul>
@@ -99,8 +103,10 @@ const Footer = () => {
             <div className="col-lg-6 col-md-12">
               <p>
                 Copyrights &copy; 2024 -{" "}
-                <a href="https://imransdesign.com/">Lucas Mazetto</a>, Feito com
-                ❤️
+                <a href="https://www.linkedin.com/in/lucas-mazetto-b07685163/">
+                  Lucas Mazetto
+                </a>
+                , Feito com ❤️
                 <br />
               </p>
             </div>

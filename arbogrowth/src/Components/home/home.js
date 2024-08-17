@@ -26,8 +26,6 @@ const Home = () => {
         const result = await response.json();
         const selectedProduto = result.result.slice(0, 3);
         setData(selectedProduto);
-
-        console.log(result);
       } catch (error) {
         console.log(error);
       }
@@ -51,7 +49,10 @@ const Home = () => {
                     <Link to="/produtos" className="boxed-btn">
                       Produtos
                     </Link>
-                    <a href="contact.html" className="bordered-btn">
+                    <a
+                      href="https://wa.me/5519991939339"
+                      className="bordered-btn"
+                    >
                       Contato
                     </a>
                   </div>

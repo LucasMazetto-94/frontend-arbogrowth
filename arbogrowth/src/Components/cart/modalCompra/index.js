@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   ModalHeader,
@@ -15,14 +15,11 @@ import {
   NavLink,
   TabPane,
   TabContent,
-  Card,
-  CardHeader,
-  CardBody,
 } from "reactstrap";
-import axios from "axios";
 import Select from "react-select";
 import classnames from "classnames";
 import CheckoutButton from "./mercadoPago";
+import Pix from "./pagamentoPix";
 
 const ModalCompra = ({
   toggle,
@@ -45,34 +42,62 @@ const ModalCompra = ({
   const [meuCep, setMeuCep] = useState("");
   const [complemento, setComplemento] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("mercadoPago");
-  const [qrCode, setQrCode] = useState("");
   const [statusCompra, setStatusCompra] = useState("");
+  const [statusPix, setStatusPix] = useState("");
 
   const handleStatusCompra = (status) => {
     setStatusCompra(status);
   };
 
-  const gerarPix = useCallback(async () => {
-    try {
-      const response = await axios.post("http://localhost:5000/api/gerar_pix", {
-        nome: nomeCompleto,
-        valor: total,
-      });
-      console.log(response.data.qrCode);
-      setQrCode(response.data.qrCode);
-    } catch (error) {
-      console.error("Erro ao buscar QR code:", error);
-    }
-  }, []);
+  const handleStatusPix = (status) => {
+    setStatusPix(status);
+  };
 
   const handlePaymentMethodChange = (method) => {
     setPaymentMethod(method);
   };
 
-  const [animationNavTab, setanimationNavTab] = useState("1");
+  const [animationNavTab, setAnimationNavTab] = useState("1");
   const animationNavToggle = (tab) => {
     if (animationNavTab !== tab) {
-      setanimationNavTab(tab);
+      setAnimationNavTab(tab);
+    }
+  };
+
+  useEffect(() => {
+    if (show) {
+      const timer = setTimeout(() => {
+        toggle();
+      }, 300000); // 300000 ms = 5 minutes
+
+      return () => clearTimeout(timer); // Limpa o temporizador se o modal fechar antes dos 5 minutos
+    }
+  }, [show, toggle]);
+
+  const preencherCep = async (cep) => {
+    if (meuCep !== "") {
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        if (!response.ok) {
+          throw new Error("Erro ao buscar CEP");
+        }
+
+        const data = await response.json();
+
+        if (data.erro) {
+          alert("CEP não encontrado");
+          return;
+        }
+
+        // Preencher os campos do modal
+        document.getElementById("logradouro").value = data.logradouro;
+        document.getElementById("complemento").value = data.complemento;
+        document.getElementById("bairro").value = data.bairro;
+        document.getElementById("cidade").value = data.localidade;
+      } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro ao buscar o CEP. Tente novamente.");
+      }
     }
   };
 
@@ -210,52 +235,19 @@ const ModalCompra = ({
           className="text-muted"
         >
           <TabPane tabId="2" id="animation-home">
-            <ModalBody>
-              <Row className="mb-2">
+            <ModalBody className="pt-0">
+              <Row>
                 <Col lg={6}>
-                  <Label htmlFor="nomeCompleto">Nome Completo</Label>
+                  <Label htmlFor="meuCep">CEP</Label>
                   <Input
                     type="text"
-                    id="nomeCompleto"
-                    name="nomeCompleto"
-                    placeholder="Ex: Lucas Pereira da Silva"
-                    onChange={(e) => setNomeCompleto(e.target.value)}
+                    id="meuCep"
+                    name="meuCep"
+                    placeholder="Ex: 15045150"
+                    onChange={(e) => setMeuCep(e.target.value)}
+                    onBlur={() => preencherCep(meuCep)}
                   />
                 </Col>
-                <Col lg={6}>
-                  <Label htmlFor="emailContato">Email de Contato</Label>
-                  <Input
-                    type="email"
-                    id="emailContato"
-                    name="emailContato"
-                    placeholder="Ex: lucasp@gmail.com"
-                    onChange={(e) => setEmailContato(e.target.value)}
-                  />
-                </Col>
-              </Row>
-              <Row className="mb-2">
-                <Col lg={6}>
-                  <Label htmlFor="telefone">Telefone de Contato</Label>
-                  <Input
-                    type="text"
-                    id="telefone"
-                    name="telefone"
-                    placeholder="Ex: 19991939339"
-                    onChange={(e) => setTelefone(e.target.value)}
-                  />
-                </Col>
-                <Col lg={6}>
-                  <Label htmlFor="cpf">CPF</Label>
-                  <Input
-                    type="text"
-                    id="cpf"
-                    name="cpf"
-                    placeholder="Ex: 42612157819"
-                    onChange={(e) => setCpf(e.target.value)}
-                  />
-                </Col>
-              </Row>
-              <Row className="mb-2">
                 <Col lg={6}>
                   <Label htmlFor="logradouro">Logradouro</Label>
                   <Input
@@ -266,28 +258,8 @@ const ModalCompra = ({
                     onChange={(e) => setLogradouro(e.target.value)}
                   />
                 </Col>
-                <Col lg={6}>
-                  <Label htmlFor="numero">Número</Label>
-                  <Input
-                    type="text"
-                    id="numero"
-                    name="numero"
-                    placeholder="Ex: 25 ou 25-b"
-                    onChange={(e) => setNumero(e.target.value)}
-                  />
-                </Col>
               </Row>
-              <Row className="mb-2">
-                <Col lg={6}>
-                  <Label htmlFor="complemento">Complemento</Label>
-                  <Input
-                    type="text"
-                    id="complemento"
-                    name="complemento"
-                    placeholder="Ex: Bloco 3 ou apto 25"
-                    onChange={(e) => setComplemento(e.target.value)}
-                  />
-                </Col>
+              <Row className="mb-1">
                 <Col lg={6}>
                   <Label htmlFor="bairro">Bairro</Label>
                   <Input
@@ -298,8 +270,6 @@ const ModalCompra = ({
                     onChange={(e) => setBairro(e.target.value)}
                   />
                 </Col>
-              </Row>
-              <Row className="mb-2">
                 <Col lg={6}>
                   <Label htmlFor="cidade">Cidade</Label>
                   <Input
@@ -310,27 +280,91 @@ const ModalCompra = ({
                     onChange={(e) => setCidade(e.target.value)}
                   />
                 </Col>
+              </Row>
+              <Row className="mb-1">
+                <Col lg={6}>
+                  <Label htmlFor="numero">Número</Label>
+                  <Input
+                    type="text"
+                    id="numero"
+                    name="numero"
+                    placeholder="Ex: 25 ou 25-b"
+                    onChange={(e) => setNumero(e.target.value)}
+                  />
+                </Col>
+                <Col lg={6}>
+                  <Label htmlFor="complemento">Complemento</Label>
+                  <Input
+                    type="text"
+                    id="complemento"
+                    name="complemento"
+                    placeholder="Ex: Bloco 3 ou apto 25"
+                    onChange={(e) => setComplemento(e.target.value)}
+                  />
+                </Col>
+              </Row>
+
+              <Row className="mb-1">
                 <Col lg={6}>
                   <Label htmlFor="estado">Estado</Label>
                   <Select
+                    className="mt-0"
                     id="estado"
                     name="estado"
                     options={options}
                     onChange={(selectedOption) =>
                       setEstado(selectedOption ? selectedOption.value : "")
                     }
+                    onBlur={() => {}}
                   />
                 </Col>
               </Row>
+
               <Row>
                 <Col lg={6}>
-                  <Label htmlFor="meuCep">CEP</Label>
+                  <Label htmlFor="nomeCompleto">Nome Completo</Label>
                   <Input
                     type="text"
-                    id="meuCep"
-                    name="meuCep"
-                    placeholder="Ex: 15045150"
-                    onChange={(e) => setMeuCep(e.target.value)}
+                    id="nomeCompleto"
+                    name="nomeCompleto"
+                    placeholder="Ex: Lucas Pereira da Silva"
+                    onChange={(e) => setNomeCompleto(e.target.value)}
+                    onBlur={() => {}}
+                  />
+                </Col>
+                <Col lg={6}>
+                  <Label htmlFor="emailContato">Email de Contato</Label>
+                  <Input
+                    type="email"
+                    id="emailContato"
+                    name="emailContato"
+                    placeholder="Ex: lucasp@gmail.com"
+                    onChange={(e) => setEmailContato(e.target.value)}
+                    onBlur={() => {}}
+                  />
+                </Col>
+              </Row>
+              <Row className="mb-1">
+                <Col lg={6}>
+                  <Label htmlFor="telefone">Telefone de Contato</Label>
+                  <Input
+                    type="text"
+                    id="telefone"
+                    name="telefone"
+                    placeholder="Ex: 19991939339"
+                    onChange={(e) => setTelefone(e.target.value)}
+                    onBlur={() => {}}
+                  />
+                </Col>
+                <Col lg={6}>
+                  <Label htmlFor="cpf">CPF</Label>
+                  <Input
+                    type="text"
+                    id="cpf"
+                    name="cpf"
+                    placeholder="Ex: 42612157819"
+                    onChange={(e) => setCpf(e.target.value)}
+                    onBlur={() => {}}
                   />
                 </Col>
               </Row>
@@ -345,7 +379,6 @@ const ModalCompra = ({
                     color={paymentMethod === "pix" ? "primary" : "secondary"}
                     onClick={() => {
                       handlePaymentMethodChange("pix");
-                      gerarPix();
                     }}
                   >
                     PIX
@@ -363,16 +396,9 @@ const ModalCompra = ({
               </Row>
 
               {paymentMethod === "pix" ? (
-                <Row className="d-flex justify-content-center mt-3">
-                  <Col lg={6}>
-                    <Card>
-                      <CardHeader className="text-center">
-                        <h5>Pagamento via Pix</h5>
-                      </CardHeader>
-                      <CardBody style={{ height: "325px" }}>
-                        <img src={qrCode} alt="QR Code" />
-                      </CardBody>
-                    </Card>
+                <Row className="mt-3">
+                  <Col lg={12}>
+                    <Pix total={total} onStatusPix={handleStatusPix} />
                   </Col>
                 </Row>
               ) : (
@@ -385,6 +411,13 @@ const ModalCompra = ({
                   </Col>
                 </Row>
               )}
+              <>
+                {(statusCompra === "approved" || statusPix === "approved") && (
+                  <p className="mt-2">
+                    <i className="ri-check-double-line"></i>APROVADO
+                  </p>
+                )}
+              </>
             </ModalBody>
           </TabPane>
         </TabContent>
@@ -392,21 +425,20 @@ const ModalCompra = ({
           <Button
             type="submit"
             color="primary"
-            disabled={
-              statusCompra === "" ||
-              statusCompra !== "approved" ||
-              nomeCompleto === "" ||
-              emailContato === "" ||
-              telefone === "" ||
-              cpf === "" ||
-              logradouro === "" ||
-              numero === "" ||
-              bairro === "" ||
-              cidade === "" ||
-              estado === "" ||
-              meuCep === "" ||
-              complemento === ""
-            }
+            // disabled={
+            //   statusCompra === "" ||
+            //   statusCompra !== "approved" ||
+            //   nomeCompleto === "" ||
+            //   emailContato === "" ||
+            //   telefone === "" ||
+            //   cpf === "" ||
+            //   logradouro === "" ||
+            //   numero === "" ||
+            //   bairro === "" ||
+            //   cidade === "" ||
+            //   estado === "" ||
+            //   meuCep === ""
+            // }
           >
             Finalizar
           </Button>
