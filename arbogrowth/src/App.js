@@ -7,6 +7,7 @@ import ScrollToTop from "./Components/ScrollToTop";
 import { AuthProvider } from "./Context/authContext"; // Importe o AuthProvider
 
 function App() {
+  console.log("app rodando");
   return (
     <div className="App">
       <BrowserRouter>

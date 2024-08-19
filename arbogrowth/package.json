@@ -33,7 +33,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000",
   "env": {
     "REACT_APP_API_URL": "http://localhost:5000",
     "JWT_SECRET": "R752qa&W8vQ@pQE65!4u3o"
