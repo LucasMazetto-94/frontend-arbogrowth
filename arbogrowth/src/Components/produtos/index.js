@@ -16,7 +16,7 @@ const Produtos = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/produtos");
+        const response = await fetch("http://167.88.39.158:5000/api/produtos");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
