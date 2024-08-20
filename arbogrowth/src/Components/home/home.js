@@ -19,7 +19,9 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/produtos");
+        const response = await fetch(
+          "https://www.arbogrowth.com.br/api/produtos"
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
