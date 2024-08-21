@@ -75,7 +75,7 @@ const CheckoutButton = ({ total, onStatusCompra }) => {
 
             try {
               const response = await fetch(
-                "http://localhost:5000/api/create_preference",
+                `${process.env.REACT_APP_API_URL}/api/create_preference`,
                 {
                   method: "POST",
                   headers: {

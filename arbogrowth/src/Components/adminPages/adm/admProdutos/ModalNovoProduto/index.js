@@ -28,7 +28,9 @@ const ModalNovoProduto = ({ modal, toggle, item, buscarProdutos }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/tipo_produto");
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/api/tipo_produto`
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -90,10 +92,10 @@ const ModalNovoProduto = ({ modal, toggle, item, buscarProdutos }) => {
     let method = "POST"; // Método padrão
 
     if (item.id > 0) {
-      url = "http://localhost:5000/api/alterar_produto";
+      url = `${process.env.REACT_APP_API_URL}/api/alterar_produto`;
       method = "PUT"; // Método para alteração
     } else {
-      url = "http://localhost:5000/api/cadastro_produtos";
+      url = `${process.env.REACT_APP_API_URL}/api/cadastro_produtos`;
     }
 
     try {

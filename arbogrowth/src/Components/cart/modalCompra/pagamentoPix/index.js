@@ -25,13 +25,16 @@ const Pix = ({ total, onStatusPix }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/gerar_pix", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/gerar_pix`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
 
       const result = await response.json();
       console.log(result);
@@ -47,7 +50,7 @@ const Pix = ({ total, onStatusPix }) => {
     const interval = setInterval(async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/verificar_pix/${idCompra}`,
+          `${process.env.REACT_APP_API_URL}/api/verificar_pix/${idCompra}`,
           {
             method: "POST",
           }

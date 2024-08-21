@@ -49,10 +49,13 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, senha) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/login", {
-        email,
-        senha,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/login`,
+        {
+          email,
+          senha,
+        }
+      );
       const token = response.data.token;
       localStorage.clear();
       localStorage.setItem("token", token);

@@ -33,13 +33,16 @@ const AdmVendas = () => {
   const fetchData = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/pedidos", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/pedidos`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -64,7 +67,7 @@ const AdmVendas = () => {
       const token = localStorage.getItem("token");
       const response = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/update_rastreio",
+        url: `${process.env.REACT_APP_API_URL}/api/update_rastreio`,
         data: payload,
         headers: {
           Authorization: `Bearer ${token}`,

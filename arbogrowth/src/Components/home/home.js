@@ -20,7 +20,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://www.arbogrowth.com.br/api/api/produtos"
+          `${process.env.REACT_APP_API_URL}/api/produtos`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);

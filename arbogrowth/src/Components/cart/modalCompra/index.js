@@ -141,13 +141,16 @@ const ModalCompra = ({
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/cadastro_venda", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/cadastro_venda`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const data = await response.json();
 
