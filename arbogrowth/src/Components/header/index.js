@@ -10,7 +10,7 @@ import {
   Collapse,
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logo from "../../assets/images/logo-correta-1.png";
+import logo from "../../assets/images/logo_teste.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CartContext } from "../../Context/cart";
 
@@ -57,7 +57,7 @@ const Header = () => {
           <img
             className="rounded ms-4"
             src={logo}
-            alt=""
+            alt="Logo"
             style={{ width: "100px", height: "50px" }}
           />
         </NavbarBrand>

@@ -158,6 +158,8 @@ html {
   p:last-child {
     margin: 0;
   }
+
+  
   
   /* -----------------------------------------------------------------------------
   
@@ -464,7 +466,6 @@ html {
   
   .section-title p {
     font-size: 15px;
-    width: 530px;
     margin: 0 auto;
     color: #555;
     margin-top: 10px;
@@ -735,6 +736,38 @@ html {
   
   ul.navbar-nav {
     margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-show {
+      display: block;
+      text-align: right; /* Alinha o texto à direita */
+    }
+  
+    .mobile-show ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .mobile-show ul li {
+      display: block;
+      margin: 0;
+      padding: 10px 0; /* Adiciona espaçamento entre os itens */
+    }
+  
+    .mobile-show ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px; /* Espaçamento interno para o link */
+      display: block;
+      width: 100%; /* Faz com que o link ocupe toda a largura do item da lista */
+      background-color: #051922; /* Cor de fundo para destaque, pode ajustar conforme necessário */
+    }
+  
+    .mobile-show ul li a:hover {
+      background-color: #F28123; /* Cor de fundo ao passar o mouse */
+    }
   }
   
   .search-area {
@@ -2560,7 +2593,7 @@ html {
   }
   
   td.product-image img {
-    width: 50px;
+    max-width: 50px;
     -webkit-box-shadow: none;
     box-shadow: none;
     margin-bottom: 0;
@@ -2568,7 +2601,7 @@ html {
   
   .cart-table-wrap tbody tr td {
     border: 1px solid #efefef;
-    padding: 20px 0;
+    padding: 10px 0;
     color: #051922;
   }
   
@@ -2780,8 +2813,8 @@ html {
 }
 
 .quantity-buttons button {
-  width: 36px;
-  height: 36px;
+  width: 25px;
+  height: 25px;
   border: none;
   background-color: #012738;
   color: #F28123;
@@ -2802,14 +2835,15 @@ html {
 }
 
 .quantity-buttons input {
-  width: 50px;
-  height: 36px;
+  width: 30px; /* Ajuste a largura para garantir que o número esteja centralizado */
+  height: 30px; /* Ajuste a altura para um melhor alinhamento */
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 3px;
-  font-size: 1rem;
+  font-size: 12px;
   font-family: "Open Sans", sans-serif;
   margin: 0 5px;
+  padding: 0; /* Remove o preenchimento interno se necessário */
 }
 
 .quantity-buttons input:focus {

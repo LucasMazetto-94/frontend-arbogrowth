@@ -15,6 +15,20 @@ import { CartContext } from "../../Context/cart";
 const Home = () => {
   const [data, setData] = useState([]);
   const { addProductsCart } = useContext(CartContext);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,17 +56,17 @@ const Home = () => {
       <div className="hero-area hero-bg">
         <div className="container">
           <div className="row">
-            <div className="col-lg-9 offset-lg-2 text-center">
+            <div className="col-lg-9 col-md-12 col-sm-12 col-12 offset-lg-2 text-center">
               <div className="hero-text">
                 <div className="hero-text-tablecell">
-                  <p className="subtitle"> ArboGrowth</p>
-                  <h1>Produtos Agrícolas</h1>
+                  <p className="subtitle">ArboGrowth</p>
+                  <h1 className="subtitle">Produtos de Jardinagem</h1>
                   <div className="hero-btns">
                     <Link to="/produtos" className="boxed-btn">
                       Produtos
                     </Link>
                     <a
-                      href="https://wa.me/5519991939339"
+                      href="https://wa.me/5511940281896"
                       className="bordered-btn"
                     >
                       Contato
@@ -69,23 +83,23 @@ const Home = () => {
       <div className="list-section pt-80 pb-50">
         <div className="container">
           <div className="row">
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <div className="list-box d-flex justify-content-start align-items-center">
+            <div className="col-lg-4 col-md-6 col-sm-12 mb-4 mb-lg-0">
+              <div className="list-box d-flex justify-content-center align-items-center">
                 <div className="list-icon">
                   <FontAwesomeIcon icon={faShippingFast} size="3x" />
                 </div>
-                <div className="content ms-3">
-                  <h3>Entragas</h3>
+                <div className="content ms-3 text-start">
+                  <h3>Entregas</h3>
                   <p>Entregamos em todo Brasil</p>
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
+            <div className="col-lg-4 col-md-6 col-sm-12 mb-4 mb-lg-0">
               <div className="list-box d-flex justify-content-center align-items-center">
                 <div className="list-icon">
                   <FontAwesomeIcon icon={faPhoneVolume} size="3x" />
                 </div>
-                <div className="content ms-3">
+                <div className="content ms-3 text-start">
                   <h3>Suporte</h3>
                   <p>
                     Trabalhamos com profissionais
@@ -94,12 +108,12 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="list-box d-flex justify-content-end align-items-center">
+            <div className="col-lg-4 col-md-6 col-sm-12">
+              <div className="list-box d-flex justify-content-center align-items-center">
                 <div className="list-icon">
                   <FontAwesomeIcon icon={faPersonChalkboard} size="3x" />
                 </div>
-                <div className="content ms-3">
+                <div className="content ms-3 text-start">
                   <h3>Parcerias</h3>
                   <p>Temos as melhores marcas</p>
                 </div>
@@ -116,11 +130,18 @@ const Home = () => {
             <div className="col-lg-8 offset-lg-2 text-center">
               <div className="section-title">
                 <h3>
-                  <span className="text-success">Nossos</span> Productos
+                  <span className="text-success">Nossos</span> Produtos
                 </h3>
                 <p>
                   Trabalhamos com as melhores marcas para seu cultivo, conheça
-                  nossos produtos!
+                  nossos
+                  {windowWidth < 530 ? (
+                    " produtos!"
+                  ) : (
+                    <>
+                      <br /> produtos!
+                    </>
+                  )}
                 </p>
               </div>
             </div>
@@ -230,7 +251,7 @@ const Home = () => {
             <Col className="col-auto">
               <div>
                 <Link
-                  to="https://wa.me/5519991939339"
+                  to="https://wa.me/5511940281896"
                   target="_blank"
                   className="btn bg-gradient btn-lg btn-success"
                 >

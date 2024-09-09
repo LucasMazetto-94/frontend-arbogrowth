@@ -28,14 +28,14 @@ const Sobre = () => {
               <div className="row">
                 <div className="col-12">
                   <h2>Nosso Compromisso</h2>
-                  <p>
+                  <p className="mb-3">
                     Bem-vindo à Arbo Growth, sua fonte confiável para produtos e
                     cursos especializados em cuidados com árvores, jardins e
                     solo. Nosso compromisso é fornecer soluções de alta
                     qualidade para entusiastas e profissionais da arboricultura
                     e do manejo ambiental.
                   </p>
-                  <h2>Nossa Missão</h2>
+                  <h2 className="mt-3">Nossa Missão</h2>
                   <p>
                     Nossa missão é promover a saúde e a longevidade das árvores,
                     cuidado geral com plantas e jardins e a vitalidade do solo,

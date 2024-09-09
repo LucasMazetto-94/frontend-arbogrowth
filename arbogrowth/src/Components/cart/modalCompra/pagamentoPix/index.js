@@ -63,6 +63,7 @@ const Pix = ({ total, onStatusPix }) => {
           clearInterval(interval);
           console.log("Pagamento aprovado");
           onStatusPix("approved");
+          localStorage.setItem("approved", result.status);
         } else if (
           result.status === "rejected" ||
           result.status === "pending"

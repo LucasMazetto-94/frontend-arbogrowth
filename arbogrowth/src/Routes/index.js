@@ -9,6 +9,7 @@ import Adm from "../Components/adminPages/adm";
 import PrivateRoute from "./privateRoute";
 import MainLayout from "../Components/Layouts/mainLayout";
 import AdminLayout from "../Components/Layouts/adminLayout";
+import NovaSenha from "../Components/adminPages/novaSenha";
 
 const MinhasRotas = () => {
   return (
@@ -51,6 +52,14 @@ const MinhasRotas = () => {
         element={
           <AdminLayout>
             <Login />
+          </AdminLayout>
+        }
+      />
+      <Route
+        path="/novaSenha"
+        element={
+          <AdminLayout>
+            <NovaSenha />
           </AdminLayout>
         }
       />

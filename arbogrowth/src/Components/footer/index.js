@@ -1,12 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Col } from "react-bootstrap";
 const Footer = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <React.Fragment>
       <div className="footer-area">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-12">
+            <Col lg={3} md={12}>
               <div className="footer-box about-widget">
                 <h2 className="widget-title">Sobre Nós</h2>
                 <p>
@@ -16,11 +30,6 @@ const Footer = () => {
                 </p>
                 <div className="social-icons">
                   <ul className="sub-menu">
-                    <li>
-                      <a href="#" target="_blank">
-                        <i className="fab fa-facebook-f"></i>
-                      </a>
-                    </li>
                     <li>
                       <a
                         href="https://www.instagram.com/arbogrowth?igsh=MnVxMXJkaDU2am5n"
@@ -40,15 +49,23 @@ const Footer = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="https://wa.me/5519991939339" target="_blank">
+                      <a href="https://wa.me/5511940281896" target="_blank">
                         <i className="ri-whatsapp-fill"></i>
                       </a>
                     </li>
                   </ul>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-5 col-md-12 d-flex justify-content-center">
+            </Col>
+            <Col
+              lg={5}
+              md={12}
+              className={
+                windowWidth <= 1000
+                  ? "d-flex justify-content-start mb-5"
+                  : "d-flex justify-content-center"
+              }
+            >
               <div className="footer-box">
                 <h2 className="widget-title mb-3">Links Úteis</h2>
                 <div>
@@ -63,12 +80,12 @@ const Footer = () => {
                       <a href="/produtos">Produtos</a>
                     </li>
                     <li>
-                      <a href="https://wa.me/5519991939339">Contato</a>
+                      <a href="https://wa.me/5511940281896">Contato</a>
                     </li>
                   </ul>
                 </div>
               </div>
-            </div>
+            </Col>
             <div className="col-lg-4 col-md-12">
               <div className="footer-box">
                 <h2 className="widget-title">Contatos</h2>
@@ -81,7 +98,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <p>
-                      <i className="ri-phone-fill"></i>+55 (11) 99999-9999
+                      <i className="ri-phone-fill"></i>+55 (11) 94028-1896
                     </p>
                   </li>
                   <li>

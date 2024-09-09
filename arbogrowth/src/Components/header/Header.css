@@ -29,4 +29,24 @@
     padding: 0.5rem 1rem; /* Ajuste o espaçamento interno */
   }
 
+  @media (max-width: 576px) {
+    .navbar-nav {
+      align-items: flex-end; /* Alinha o texto à direita */
+    }
+  
+    .navbar-toggler {
+      margin-left: 300px; /* Ajusta a posição do ícone de toggle */
+      margin-top: -55px;
+    }
+  
+    .navbar-collapse {
+      justify-content: flex-end; /* Alinha os itens do collapse à direita */
+      text-align: right; /* Alinha o texto dos links à direita */
+    }
+  
+    .badge {
+      top: -10px;
+      right: -10px; /* Ajuste para posicionar melhor o badge */
+    }
+  }
   

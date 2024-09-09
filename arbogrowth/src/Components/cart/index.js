@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { CartContext } from "../../Context/cart";
 import { Link } from "react-router-dom";
 import ModalCompra from "./modalCompra";
+import { Table } from "reactstrap";
 
 const Carrinho = () => {
   const {
@@ -15,6 +16,7 @@ const Carrinho = () => {
   const [selectedShipping, setSelectedShipping] = useState(null);
   const [shipping, setShipping] = useState(0);
   const [total, setTotal] = useState(0);
+
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -108,7 +110,7 @@ const Carrinho = () => {
           <div className="row">
             <div className="col-lg-8 col-md-12">
               <div className="cart-table-wrap">
-                <table className="cart-table">
+                <table className="cart-table mb-2">
                   <thead className="cart-table-head">
                     <tr className="table-head-row">
                       <th className="product-remove"></th>
@@ -140,12 +142,14 @@ const Carrinho = () => {
                             >
                               -
                             </button>
-                            <input
-                              className="m-0 text-end form-control-sm" // Classes adicionadas
-                              type="number"
-                              value={product.quantity}
-                              readOnly
-                            />
+                            <div className="d-flex justify-content-center">
+                              <input
+                                className="m-0 form-control-sm p-0 ps-2" // Classes adicionadas
+                                type="number"
+                                value={product.quantity}
+                                readOnly
+                              />
+                            </div>
                             <button
                               onClick={() => handleIncreaseQuantity(product)}
                             >
@@ -163,7 +167,7 @@ const Carrinho = () => {
               </div>
             </div>
 
-            <div className="col-lg-4">
+            <div className="col-lg-4 col-md-12">
               <div className="total-section">
                 <table className="total-table">
                   <thead className="total-table-head">
@@ -271,7 +275,7 @@ const Carrinho = () => {
                     href=""
                     className="boxed-btn"
                     onClick={shippingOptions.length <= 0 ? "" : toggle}
-                    disabled={shippingOptions.length <= 0 ? true : false}
+                    disabled={!(shippingOptions.length > 0)}
                   >
                     Finalizar
                   </Link>

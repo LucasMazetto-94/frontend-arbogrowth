@@ -102,6 +102,7 @@ const CheckoutButton = ({ total, onStatusCompra }) => {
               const result = await response.json();
               setIsLoading(false);
               onStatusCompra(result);
+              localStorage.setItem("approved", result);
               console.log(result); // Verificar o status da compra
             } catch (error) {
               console.error("Erro ao processar o pagamento:", error);

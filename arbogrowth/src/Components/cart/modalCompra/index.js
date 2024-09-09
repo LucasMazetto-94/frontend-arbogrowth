@@ -44,6 +44,8 @@ const ModalCompra = ({
   const [paymentMethod, setPaymentMethod] = useState("mercadoPago");
   const [statusCompra, setStatusCompra] = useState("");
   const [statusPix, setStatusPix] = useState("");
+  const [dadosCep, setDadosCep] = useState("");
+  const [generalApproved, setGeneralApproved] = useState("");
 
   const handleStatusCompra = (status) => {
     setStatusCompra(status);
@@ -64,6 +66,34 @@ const ModalCompra = ({
     }
   };
 
+  // Efeito para mudar a aba automaticamente se o pagamento foi aprovado
+  useEffect(() => {
+    const approved = localStorage.getItem("approved");
+    console.log("Valor de approved no localStorage:", approved); // Debug
+    if (approved === "approved") {
+      setAnimationNavTab("2"); // Muda para a aba de Frete após 2 segundos
+      // Muda para a aba de Frete se o pagamento já foi aprovado
+    }
+    setGeneralApproved(approved);
+  }, [show]); // Executa sempre que o modal for aberto
+
+  // Efeito para monitorar o estado dos pagamentos e alterar a aba quando o pagamento for aprovado
+  useEffect(() => {
+    console.log("StatusCompra:", statusCompra);
+    console.log("StatusPix:", statusPix);
+    console.log("GeneralApproved:", generalApproved);
+
+    if (
+      statusCompra === "approved" ||
+      statusPix === "approved" ||
+      generalApproved === "approved"
+    ) {
+      console.log("Condição aprovada, mudando para a aba de Frete (Tab 2)");
+      setAnimationNavTab("2"); // Tab 2 é a aba de Frete
+      localStorage.setItem("approved", "approved"); // Salva o estado de aprovado no localStorage
+    }
+  }, [statusCompra, statusPix, generalApproved]);
+
   useEffect(() => {
     if (show) {
       const timer = setTimeout(() => {
@@ -75,7 +105,7 @@ const ModalCompra = ({
   }, [show, toggle]);
 
   const preencherCep = async (cep) => {
-    if (meuCep !== "") {
+    if (cep !== "") {
       try {
         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         if (!response.ok) {
@@ -83,17 +113,15 @@ const ModalCompra = ({
         }
 
         const data = await response.json();
+        setDadosCep(data);
 
         if (data.erro) {
           alert("CEP não encontrado");
           return;
         }
-
-        // Preencher os campos do modal
-        document.getElementById("logradouro").value = data.logradouro;
-        document.getElementById("complemento").value = data.complemento;
-        document.getElementById("bairro").value = data.bairro;
-        document.getElementById("cidade").value = data.localidade;
+        setLogradouro(data.logradouro);
+        setBairro(data.bairro);
+        setCidade(data.localidade);
       } catch (error) {
         console.error("Erro:", error);
         alert("Erro ao buscar o CEP. Tente novamente.");
@@ -129,16 +157,17 @@ const ModalCompra = ({
           email: emailContato,
           phone: telefone,
           document: cpf,
-          address: logradouro,
+          address: logradouro || dadosCep.logradouro,
           number: numero,
           complement: complemento,
-          district: bairro,
-          city: cidade,
+          district: bairro || dadosCep.bairro,
+          city: cidade || dadosCep.localidade,
           state_abbr: estado,
           postal_code: meuCep,
         },
       },
     };
+    console.log(payload);
 
     try {
       const response = await fetch(
@@ -157,6 +186,7 @@ const ModalCompra = ({
       if (response.ok) {
         limparCarrinho();
         alert("Compra realizada com sucesso!");
+        localStorage.removeItem("approved");
       } else {
         alert(`Erro ao finalizar a compra: ${data.error}`);
       }
@@ -165,6 +195,7 @@ const ModalCompra = ({
       alert("Erro interno ao realizar compra.");
     }
     toggle();
+    localStorage.removeItem("approved");
   };
 
   const options = [
@@ -257,6 +288,7 @@ const ModalCompra = ({
                     type="text"
                     id="logradouro"
                     name="logradouro"
+                    value={logradouro}
                     placeholder="Ex: Rua Claudio Manuel da Nobrega"
                     onChange={(e) => setLogradouro(e.target.value)}
                   />
@@ -269,6 +301,7 @@ const ModalCompra = ({
                     type="text"
                     id="bairro"
                     name="bairro"
+                    value={bairro}
                     placeholder="Ex: Santa Cecília"
                     onChange={(e) => setBairro(e.target.value)}
                   />
@@ -279,6 +312,7 @@ const ModalCompra = ({
                     type="text"
                     id="cidade"
                     name="cidade"
+                    value={cidade}
                     placeholder="Ex: Paulínia"
                     onChange={(e) => setCidade(e.target.value)}
                   />
@@ -415,7 +449,9 @@ const ModalCompra = ({
                 </Row>
               )}
               <>
-                {(statusCompra === "approved" || statusPix === "approved") && (
+                {(statusCompra === "approved" ||
+                  statusPix === "approved" ||
+                  generalApproved === "approved") && (
                   <p className="mt-2">
                     <i className="ri-check-double-line"></i>APROVADO
                   </p>
@@ -428,20 +464,23 @@ const ModalCompra = ({
           <Button
             type="submit"
             color="primary"
-            // disabled={
-            //   statusCompra === "" ||
-            //   statusCompra !== "approved" ||
-            //   nomeCompleto === "" ||
-            //   emailContato === "" ||
-            //   telefone === "" ||
-            //   cpf === "" ||
-            //   logradouro === "" ||
-            //   numero === "" ||
-            //   bairro === "" ||
-            //   cidade === "" ||
-            //   estado === "" ||
-            //   meuCep === ""
-            // }
+            disabled={
+              !(
+                statusCompra === "approved" ||
+                statusPix === "approved" ||
+                generalApproved === "approved"
+              ) || // Habilitar apenas se um dos três estiver aprovado
+              nomeCompleto === "" ||
+              emailContato === "" ||
+              telefone === "" ||
+              cpf === "" ||
+              logradouro === "" ||
+              numero === "" ||
+              bairro === "" ||
+              cidade === "" ||
+              estado === "" ||
+              meuCep === ""
+            }
           >
             Finalizar
           </Button>

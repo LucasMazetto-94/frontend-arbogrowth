@@ -1,22 +1,36 @@
 import React, { useState } from "react";
-import { useAuth } from "../../../Context/authContext"; // Certifique-se de ajustar o caminho
-import "./Login.css";
+import "../login/Login.css";
 import logo from "../../../assets/images/logo-correta-1.png"; // Ajuste o caminho conforme necessário
-import { Link } from "react-router-dom";
 
-const Login = () => {
+const NovaSenha = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const payload = {
+      email: email,
+    };
     try {
-      await login(email, password);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/alterar_senha`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+      if (response.ok) {
+        alert("Verifique seu email");
+      } else {
+        alert("Erro ao resetar senha");
+      }
     } catch (err) {
-      setError("Login failed. Check your credentials.");
+      setError("Erro ao resetar senha");
     }
+    setEmail("");
   };
 
   return (
@@ -24,7 +38,7 @@ const Login = () => {
       <div className="row">
         <div className="col-lg-9 offset-lg-2 text-center">
           <img src={logo} alt="Arbogrowth Logo" className="logo" />
-          <h2>Login</h2>
+          <h2>Nova Senha</h2>
           {error && <p className="error-message">{error}</p>}
           <form onSubmit={handleSubmit}>
             <div>
@@ -36,25 +50,12 @@ const Login = () => {
                 required
               />
             </div>
-            <div>
-              <label>Password:</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button type="submit">Login</button>
+            <button type="submit">Enviar</button>
           </form>
-
-          <Link to="/novaSenha" className="text-muted btn btn-outline-light">
-            Esqueci minha senha
-          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default NovaSenha;
