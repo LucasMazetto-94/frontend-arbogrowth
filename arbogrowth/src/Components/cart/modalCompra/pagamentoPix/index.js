@@ -104,37 +104,43 @@ const Pix = ({ total, onStatusPix }) => {
         <Col lg={6}>
           <div>
             <Row>
-              <Col lg={6} md={6}>
+              <Col lg={6} md={12} sm={12}>
                 <label htmlFor="payerFirstName">Nome</label>
-                <input
-                  id="payerFirstName"
-                  name="payerFirstName"
-                  type="text"
-                  onChange={(e) => setPayerFirstName(e.target.value)}
-                />
+                <div>
+                  <input
+                    id="payerFirstName"
+                    name="payerFirstName"
+                    type="text"
+                    onChange={(e) => setPayerFirstName(e.target.value)}
+                  />
+                </div>
               </Col>
 
-              <Col lg={6} md={6}>
+              <Col lg={6} md={12} sm={12}>
                 <label htmlFor="payerLastName">Sobrenome</label>
-                <input
-                  id="payerLastName"
-                  name="payerLastName"
-                  type="text"
-                  onChange={(e) => setPayerLastName(e.target.value)}
-                />
+                <div>
+                  <input
+                    id="payerLastName"
+                    name="payerLastName"
+                    type="text"
+                    onChange={(e) => setPayerLastName(e.target.value)}
+                  />
+                </div>
               </Col>
             </Row>
             <Row>
-              <Col lg={6} md={6}>
+              <Col lg={6} md={12} sm={12}>
                 <label htmlFor="email">E-mail</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="text"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <div>
+                  <input
+                    id="email"
+                    name="email"
+                    type="text"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
               </Col>
-              <Col lg={6} md={6}>
+              <Col lg={6} md={12} sm={12}>
                 <label htmlFor="identificationType">Tipo de documento</label>
                 <div>
                   <select
@@ -150,16 +156,19 @@ const Pix = ({ total, onStatusPix }) => {
               </Col>
             </Row>
             <Row>
-              <Col lg={6} md={6}>
+              <Col lg={6} md={12} sm={12}>
                 <label htmlFor="identificationNumber">
                   Número do documento
                 </label>
-                <input
-                  id="identificationNumber"
-                  name="identificationNumber"
-                  type="text"
-                  onChange={(e) => setIdentificationNumber(e.target.value)}
-                />
+                <div>
+                  <input
+                    className="mb-1"
+                    id="identificationNumber"
+                    name="identificationNumber"
+                    type="text"
+                    onChange={(e) => setIdentificationNumber(e.target.value)}
+                  />
+                </div>
               </Col>
             </Row>
           </div>
@@ -174,7 +183,7 @@ const Pix = ({ total, onStatusPix }) => {
           </div>
         </Col>
         {urlPix !== "" && (
-          <Col lg={6}>
+          <Col md={12} sm={12}>
             <iframe
               title="frame-1"
               style={{ width: "100%", height: "300px" }}

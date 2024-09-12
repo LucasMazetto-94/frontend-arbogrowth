@@ -20,6 +20,7 @@ import Select from "react-select";
 import classnames from "classnames";
 import CheckoutButton from "./mercadoPago";
 import Pix from "./pagamentoPix";
+import Cleave from "cleave.js/react";
 
 const ModalCompra = ({
   toggle,
@@ -79,16 +80,11 @@ const ModalCompra = ({
 
   // Efeito para monitorar o estado dos pagamentos e alterar a aba quando o pagamento for aprovado
   useEffect(() => {
-    console.log("StatusCompra:", statusCompra);
-    console.log("StatusPix:", statusPix);
-    console.log("GeneralApproved:", generalApproved);
-
     if (
       statusCompra === "approved" ||
       statusPix === "approved" ||
       generalApproved === "approved"
     ) {
-      console.log("Condição aprovada, mudando para a aba de Frete (Tab 2)");
       setAnimationNavTab("2"); // Tab 2 é a aba de Frete
       localStorage.setItem("approved", "approved"); // Salva o estado de aprovado no localStorage
     }
@@ -264,7 +260,7 @@ const ModalCompra = ({
           </NavItem>
         </Nav>
         <TabContent
-          style={{ height: "400px" }}
+          style={{ minHeight: "400px" }}
           activeTab={animationNavTab}
           className="text-muted"
         >
@@ -273,14 +269,21 @@ const ModalCompra = ({
               <Row>
                 <Col lg={6}>
                   <Label htmlFor="meuCep">CEP</Label>
-                  <Input
-                    type="text"
-                    id="meuCep"
-                    name="meuCep"
-                    placeholder="Ex: 15045150"
-                    onChange={(e) => setMeuCep(e.target.value)}
-                    onBlur={() => preencherCep(meuCep)}
-                  />
+                  <div>
+                    <Cleave
+                      className="form-control"
+                      options={{
+                        blocks: [5, 3],
+                        delimiter: "-",
+                        numericOnly: true,
+                      }}
+                      id="meuCep"
+                      name="meuCep"
+                      placeholder="Ex: 15045150"
+                      onChange={(e) => setMeuCep(e.target.value)}
+                      onBlur={() => preencherCep(meuCep)}
+                    />
+                  </div>
                 </Col>
                 <Col lg={6}>
                   <Label htmlFor="logradouro">Logradouro</Label>
@@ -384,8 +387,13 @@ const ModalCompra = ({
               <Row className="mb-1">
                 <Col lg={6}>
                   <Label htmlFor="telefone">Telefone de Contato</Label>
-                  <Input
-                    type="text"
+                  <Cleave
+                    className="form-control"
+                    options={{
+                      blocks: [2, 5, 4],
+                      delimiter: "-",
+                      numericOnly: true,
+                    }}
                     id="telefone"
                     name="telefone"
                     placeholder="Ex: 19991939339"
@@ -395,14 +403,21 @@ const ModalCompra = ({
                 </Col>
                 <Col lg={6}>
                   <Label htmlFor="cpf">CPF</Label>
-                  <Input
-                    type="text"
-                    id="cpf"
-                    name="cpf"
-                    placeholder="Ex: 42612157819"
-                    onChange={(e) => setCpf(e.target.value)}
-                    onBlur={() => {}}
-                  />
+                  <div>
+                    <Cleave
+                      className="form-control"
+                      options={{
+                        blocks: [3, 3, 3, 2],
+                        delimiter: "-",
+                        numericOnly: true,
+                      }}
+                      id="cpf"
+                      name="cpf"
+                      placeholder="Ex: 42612157819"
+                      onChange={(e) => setCpf(e.target.value)}
+                      onBlur={() => {}}
+                    />
+                  </div>
                 </Col>
               </Row>
             </ModalBody>

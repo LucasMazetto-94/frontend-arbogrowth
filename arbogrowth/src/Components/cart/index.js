@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../Context/cart";
 import { Link } from "react-router-dom";
 import ModalCompra from "./modalCompra";
-import { Table } from "reactstrap";
+import Cleave from "cleave.js/react";
 
 const Carrinho = () => {
   const {
@@ -16,6 +16,7 @@ const Carrinho = () => {
   const [selectedShipping, setSelectedShipping] = useState(null);
   const [shipping, setShipping] = useState(0);
   const [total, setTotal] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -36,7 +37,6 @@ const Carrinho = () => {
 
   const handleCalculoFrete = async (e) => {
     e.preventDefault();
-    console.log(productsCart);
 
     const listaCompras = productsCart.map((item) => ({
       id: item.id,
@@ -53,7 +53,7 @@ const Carrinho = () => {
       cepDestino: cep,
       produtos: listaCompras,
     };
-    console.log(payload);
+    console.log(payload.cepDestino);
 
     try {
       const response = await fetch(
@@ -91,6 +91,19 @@ const Carrinho = () => {
     setTotal(parseFloat(subtotal) + parseFloat(option.custom_price));
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div>
       <div className="breadcrumb-section breadcrumb-bg">
@@ -118,7 +131,9 @@ const Carrinho = () => {
                       <th className="product-name">Nome</th>
                       <th className="product-price">Preço</th>
                       <th className="product-quantity">Quantidade</th>
-                      <th className="product-total">Total</th>
+                      {windowWidth > 450 && (
+                        <th className="product-total">Total</th>
+                      )}
                     </tr>
                   </thead>
                   <tbody>
@@ -157,9 +172,11 @@ const Carrinho = () => {
                             </button>
                           </div>
                         </td>
-                        <td className="product-total">
-                          R$ {product.valor * product.quantity}
-                        </td>
+                        {windowWidth > 450 && (
+                          <td className="product-total">
+                            R$ {product.valor * product.quantity}
+                          </td>
+                        )}
                       </tr>
                     ))}
                   </tbody>
@@ -220,8 +237,13 @@ const Carrinho = () => {
                           <div className="billing-address-form">
                             <form action="index.html">
                               <p>
-                                <input
-                                  type="text"
+                                <Cleave
+                                  className="form-control"
+                                  options={{
+                                    blocks: [5, 3],
+                                    delimiter: "-",
+                                    numericOnly: true,
+                                  }}
                                   placeholder="CEP Destino"
                                   value={cep}
                                   onChange={(e) => setCep(e.target.value)}
