@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { loadMercadoPago } from "@mercadopago/sdk-js"; // Import do SDK
 import { Spinner } from "reactstrap";
 
-const CheckoutButton = ({ total, onStatusCompra }) => {
+const CheckoutButton = ({ total, onStatusCompra, nomeCliente }) => {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const initializeCardForm = async () => {
@@ -87,7 +87,7 @@ const CheckoutButton = ({ total, onStatusCompra }) => {
                     payment_method_id,
                     transaction_amount: Number(amount),
                     installments: Number(installments),
-                    description: "Descrição do produto",
+                    description: "pagamento" + nomeCliente,
                     payer: {
                       email,
                       identification: {

@@ -459,6 +459,7 @@ const ModalCompra = ({
                     <CheckoutButton
                       total={total}
                       onStatusCompra={handleStatusCompra}
+                      nomeCliente={nomeCompleto}
                     />
                   </Col>
                 </Row>
