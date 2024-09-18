@@ -80,7 +80,7 @@ const Home = () => {
       </div>
 
       {/* Benefits Section */}
-      <div className="list-section pt-80 pb-50">
+      <div className="list-section pt-80 pb-5">
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-6 col-sm-12 mb-4 mb-lg-0">
@@ -101,10 +101,7 @@ const Home = () => {
                 </div>
                 <div className="content ms-3 text-start">
                   <h3>Suporte</h3>
-                  <p>
-                    Trabalhamos com profissionais
-                    <br /> capacitados
-                  </p>
+                  <p>Profissionais Capacitados</p>
                 </div>
               </div>
             </div>
@@ -124,7 +121,7 @@ const Home = () => {
       </div>
 
       {/* Testimonial Section */}
-      <div className="product-section mt-150 mb-150">
+      <div className="product-section mt-80 mb-150">
         <div className="container">
           <div className="row">
             <div className="col-lg-8 offset-lg-2 text-center">
@@ -176,63 +173,6 @@ const Home = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="abt-section mb-150">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 col-md-12">
-              <div
-                style={{
-                  position: "relative",
-                  overflow: "hidden",
-                  aspectRatio: "1920/1080",
-                }}
-              >
-                <iframe
-                  src="https://share.synthesia.io/embeds/videos/40902347-a1b7-407c-9199-9ce384d6833c"
-                  title="Synthesia video player - abrogrowth"
-                  allowFullScreen
-                  allow="encrypted-media; fullscreen"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    top: "0",
-                    left: "0",
-                    border: "none",
-                    padding: "0",
-                    margin: "0",
-                    overflow: "hidden",
-                  }}
-                ></iframe>
-              </div>
-            </div>
-            <div className="col-lg-6 col-md-12">
-              <div className="abt-text">
-                <h2>
-                  Somos <span className="text-success">Arbogrowth</span>
-                </h2>
-                <p>
-                  Na Arbogrowth, fornecemos insumos, fertilizantes e
-                  controladores de pragas de alta qualidade para apoiar o
-                  crescimento saudável das suas plantações. Embora sejamos novos
-                  no mercado, contamos com parceiros experientes e consolidados,
-                  garantindo produtos eficazes e confiáveis para nossos
-                  clientes.
-                </p>
-                <p>
-                  Buscamos ajudar as pessoas a melhorarem suas experiência com o
-                  cultivo de plantas, tanto espécies arbóreas quanto para o
-                  menejo de jardins domésticos ou cultivos agrícolas
-                </p>
-                <a href="/sobre" className="btn btn-success mt-4">
-                  Saiba mais
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
