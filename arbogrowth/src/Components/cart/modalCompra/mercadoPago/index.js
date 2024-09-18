@@ -8,7 +8,7 @@ const CheckoutButton = ({ total, onStatusCompra, nomeCliente }) => {
     const initializeCardForm = async () => {
       await loadMercadoPago();
       const mp = new window.MercadoPago(
-        "TEST-41a163aa-51a5-413e-977e-01455fdbbd20"
+        "APP_USR-73e406e8-7bc4-4e58-89cc-5d24f4309673"
       );
       const cardForm = mp.cardForm({
         amount: String(total),
