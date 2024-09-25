@@ -530,7 +530,7 @@ html {
     position: absolute;
     z-index: 999;
     width: 100%;
-    padding: 25px 0;
+    padding: 20px 0;
   }
   
   .top-header-area.white ul.navbar-nav li.nav-item a.nav-link, .top-header-area.white ul.navbar-nav li.nav-item.active a.nav-link {
@@ -540,7 +540,7 @@ html {
   ul.navbar-nav li.nav-item a.nav-link, ul.navbar-nav li.nav-item.active a.nav-link {
     color: #fff;
     font-weight: 700;
-    margin-right: 14px;
+    margin-right: 20px;
   }
   
   a.navbar-brand img {
@@ -555,6 +555,7 @@ html {
   
   nav.main-menu ul li {
     display: inline-block;
+    
   }
   
   nav.main-menu ul li a {
@@ -673,7 +674,14 @@ html {
   }
   
   .site-logo {
-    padding: 6px 0;
+    position: relative;
+    width: 100px; /* Aumentei o tamanho para dar mais destaque */
+    height: 50px; /* Ajuste proporcional para maior definição */
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px; /* Para um efeito arredondado nas bordas */
+   
+    padding: 6px;
   }
   
   .top-header-area.sepherate-header ul li > a, .top-header-area.sepherate-header .header-icons a {
@@ -686,7 +694,7 @@ html {
   
   nav.main-menu ul ul.sub-menu li a {
     color: #555;
-    padding: 8px;
+  
     font-size: 13px;
     font-weight: 600;
   }
@@ -743,6 +751,8 @@ html {
       display: block;
       text-align: right; /* Alinha o texto à direita */
     }
+
+    
   
     .mobile-show ul {
       list-style: none;
@@ -1438,7 +1448,7 @@ html {
     text-transform: uppercase;
     letter-spacing: 7px;
     font-size: 15px;
-    margin-right: 95px;
+    margin-right: 150px;
   }
   
   .hero-text h1 {
@@ -1472,7 +1482,7 @@ html {
   
   .hero-btns {
     margin-top: 35px;
-    margin-right: 105px;
+    margin-right: 160px;
   }
   
   .hero-btns a.bordered-btn {

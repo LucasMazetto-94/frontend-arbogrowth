@@ -17,6 +17,13 @@ const Carrinho = () => {
   const [shipping, setShipping] = useState(0);
   const [total, setTotal] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [aprovacao, setAprovacao] = useState("");
+
+  const approved = localStorage.getItem("approved");
+
+  useEffect(() => {
+    setAprovacao(approved);
+  }, [approved]);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -53,7 +60,6 @@ const Carrinho = () => {
       cepDestino: cep,
       produtos: listaCompras,
     };
-    console.log(payload.cepDestino);
 
     try {
       const response = await fetch(
@@ -82,7 +88,9 @@ const Carrinho = () => {
 
   const handleShippingChange = (option) => {
     setSelectedShipping(option);
-    console.log(selectedShipping);
+
+    localStorage.setItem("shippingStorage", option.id);
+
     setShipping(option.custom_price);
     const subtotal = productsCart.reduce(
       (acc, product) => acc + product.valor * product.quantity,
@@ -296,8 +304,14 @@ const Carrinho = () => {
                   <Link
                     href=""
                     className="boxed-btn"
-                    onClick={shippingOptions.length <= 0 ? "" : toggle}
-                    disabled={!(shippingOptions.length > 0)}
+                    onClick={
+                      shippingOptions.length <= 0 && approved !== "approved"
+                        ? ""
+                        : toggle
+                    }
+                    disabled={
+                      !(shippingOptions.length > 0 || aprovacao === "approved")
+                    }
                   >
                     Finalizar
                   </Link>

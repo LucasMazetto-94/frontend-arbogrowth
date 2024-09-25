@@ -22,7 +22,7 @@ const Sobre = () => {
       <div></div>
       {/* Sobre Section */}
       {/* <div className="feature-bg"> */}
-      <div className="feature-content mt-5 mb-5">
+      <div className="feature-content mt-80 mb-5">
         <div className="container">
           <Row className="pt-80" style={{ backgroundColor: "#f1f1f1" }}>
             <Col lg={6} md={12} className="pt-0">
@@ -113,7 +113,7 @@ const Sobre = () => {
         </div>
       </Row> */}
 
-      <Row className="pb-5 ">
+      <Row className="pt-80">
         <Col lg={12}>
           <div
             style={{
@@ -130,7 +130,7 @@ const Sobre = () => {
               style={{
                 position: "absolute",
                 width: "100%",
-                height: "70%",
+                height: "80%",
                 top: "0",
                 left: "0",
                 border: "none",

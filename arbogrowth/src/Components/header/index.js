@@ -39,36 +39,35 @@ const Header = () => {
   }, []);
 
   return (
-    <div>
-      <Navbar
-        style={{
-          background: scrolled ? "rgba(0, 0, 0, 0.8)" : "transparent", // Cor escura com opacidade
-          transition: "background-color 0.3s ease",
-        }}
-        dark
-        expand="md"
-        className="text-muted fs-11 p-3 fixed-top"
-      >
+    <div
+      className="fixed-top top-header-area"
+      style={{
+        background: scrolled ? "rgba(0, 0, 0, 0.8)" : "transparent", // Cor escura com opacidade
+        transition: "background-color 0.3s ease",
+      }}
+    >
+      <Navbar dark expand="md" className="text-muted fs-11 container">
         <NavbarBrand
-          className="d-flex align-items-center ms-5"
+          className="d-flex align-items-center"
           style={{ marginRight: "200px" }}
           href="#"
         >
-          <img
-            className="rounded ms-4"
-            src={logo}
+          <div
+            className="site-logo"
+            style={{
+              backgroundImage: `url(${logo})`,
+            }}
             alt="Logo"
-            style={{ width: "100px", height: "50px" }}
           />
         </NavbarBrand>
-        <NavbarToggler onClick={toggle} />
+        <NavbarToggler className="mobile-show" onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav
-            className="fw-bolder w-50 justify-content-around"
+            className="fw-bolder main-menu"
             style={{ fontSize: "18px" }}
             navbar
           >
-            <NavItem>
+            <NavItem className="current-list-item">
               <NavLink className="text-white" href="/">
                 Home
               </NavLink>
@@ -84,11 +83,7 @@ const Header = () => {
               </NavLink>
             </NavItem>
           </Nav>
-          <Nav
-            className="d-flex justify-content-end"
-            style={{ marginLeft: "150px" }}
-            navbar
-          >
+          <Nav navbar>
             <NavItem>
               <NavLink className="text-white" href="/carrinho">
                 <div className="position-relative">
@@ -109,11 +104,6 @@ const Header = () => {
                     </span>
                   )}
                 </div>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className="text-white" href="#">
-                <FontAwesomeIcon icon={["fas", "search"]} />
               </NavLink>
             </NavItem>
           </Nav>

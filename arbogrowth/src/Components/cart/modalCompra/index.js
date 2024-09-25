@@ -47,6 +47,7 @@ const ModalCompra = ({
   const [statusPix, setStatusPix] = useState("");
   const [dadosCep, setDadosCep] = useState("");
   const [generalApproved, setGeneralApproved] = useState("");
+  const [shipping, setShipping] = useState(null);
 
   const handleStatusCompra = (status) => {
     setStatusCompra(status);
@@ -67,10 +68,16 @@ const ModalCompra = ({
     }
   };
 
+  const savedShipping = localStorage.getItem("shippingStorage");
+
+  useEffect(() => {
+    setShipping(savedShipping);
+  }, [savedShipping]);
+
   // Efeito para mudar a aba automaticamente se o pagamento foi aprovado
   useEffect(() => {
     const approved = localStorage.getItem("approved");
-    console.log("Valor de approved no localStorage:", approved); // Debug
+
     if (approved === "approved") {
       setAnimationNavTab("2"); // Muda para a aba de Frete após 2 segundos
       // Muda para a aba de Frete se o pagamento já foi aprovado
@@ -127,6 +134,7 @@ const ModalCompra = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(shipping);
 
     const payload = {
       nome: shippingName,
@@ -142,7 +150,7 @@ const ModalCompra = ({
       })),
       total: total,
       shipping: {
-        id: shippingId,
+        id: shipping !== null ? shipping : shippingId,
         additional_services: {
           receipt: false,
           own_hand: false,
@@ -163,7 +171,6 @@ const ModalCompra = ({
         },
       },
     };
-    console.log(payload);
 
     try {
       const response = await fetch(
@@ -183,6 +190,7 @@ const ModalCompra = ({
         limparCarrinho();
         alert("Compra realizada com sucesso!");
         localStorage.removeItem("approved");
+        localStorage.removeItem("shippingStorage");
       } else {
         alert(`Erro ao finalizar a compra: ${data.error}`);
       }
@@ -191,7 +199,6 @@ const ModalCompra = ({
       alert("Erro interno ao realizar compra.");
     }
     toggle();
-    localStorage.removeItem("approved");
   };
 
   const options = [
@@ -447,20 +454,21 @@ const ModalCompra = ({
                 </Col>
               </Row>
 
-              {paymentMethod === "pix" ? (
-                <Row className="mt-3">
-                  <Col lg={12}>
-                    <Pix total={total} onStatusPix={handleStatusPix} />
-                  </Col>
-                </Row>
-              ) : (
+              {paymentMethod === "mercadoPago" ? (
                 <Row className="mt-3">
                   <Col lg={12}>
                     <CheckoutButton
                       total={total}
                       onStatusCompra={handleStatusCompra}
                       nomeCliente={nomeCompleto}
+                      paymentMethod={paymentMethod}
                     />
+                  </Col>
+                </Row>
+              ) : (
+                <Row className="mt-3">
+                  <Col lg={12}>
+                    <Pix total={total} onStatusPix={handleStatusPix} />
                   </Col>
                 </Row>
               )}

@@ -2,130 +2,138 @@ import React, { useEffect, useState } from "react";
 import { loadMercadoPago } from "@mercadopago/sdk-js"; // Import do SDK
 import { Spinner } from "reactstrap";
 
-const CheckoutButton = ({ total, onStatusCompra, nomeCliente }) => {
+const CheckoutButton = ({
+  total,
+  onStatusCompra,
+  nomeCliente,
+  paymentMethod,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    const initializeCardForm = async () => {
-      await loadMercadoPago();
-      const mp = new window.MercadoPago(
-        "APP_USR-5499dba7-1855-450c-bfca-c38ec80b17f7"
-      );
-      const cardForm = mp.cardForm({
-        amount: String(total),
-        iframe: true,
-        form: {
-          id: "form-checkout",
-          cardNumber: {
-            id: "form-checkout__cardNumber",
-            placeholder: "Número do cartão",
+    if (paymentMethod === "mercadoPago") {
+      const initializeCardForm = async () => {
+        await loadMercadoPago();
+        const mp = new window.MercadoPago(
+          "TEST-41a163aa-51a5-413e-977e-01455fdbbd20"
+          // "APP_USR-5499dba7-1855-450c-bfca-c38ec80b17f7"
+        );
+        const cardForm = mp.cardForm({
+          amount: String(total),
+          iframe: true,
+          form: {
+            id: "form-checkout",
+            cardNumber: {
+              id: "form-checkout__cardNumber",
+              placeholder: "Número do cartão",
+            },
+            expirationDate: {
+              id: "form-checkout__expirationDate",
+              placeholder: "MM/YY",
+            },
+            securityCode: {
+              id: "form-checkout__securityCode",
+              placeholder: "Código de segurança",
+            },
+            cardholderName: {
+              id: "form-checkout__cardholderName",
+              placeholder: "Titular do cartão",
+            },
+            issuer: {
+              id: "form-checkout__issuer",
+              placeholder: "Banco emissor",
+            },
+            installments: {
+              id: "form-checkout__installments",
+              placeholder: "Parcelas",
+            },
+            identificationType: {
+              id: "form-checkout__identificationType",
+              placeholder: "Tipo de documento",
+            },
+            identificationNumber: {
+              id: "form-checkout__identificationNumber",
+              placeholder: "Número do documento",
+            },
+            cardholderEmail: {
+              id: "form-checkout__cardholderEmail",
+              placeholder: "E-mail",
+            },
           },
-          expirationDate: {
-            id: "form-checkout__expirationDate",
-            placeholder: "MM/YY",
-          },
-          securityCode: {
-            id: "form-checkout__securityCode",
-            placeholder: "Código de segurança",
-          },
-          cardholderName: {
-            id: "form-checkout__cardholderName",
-            placeholder: "Titular do cartão",
-          },
-          issuer: {
-            id: "form-checkout__issuer",
-            placeholder: "Banco emissor",
-          },
-          installments: {
-            id: "form-checkout__installments",
-            placeholder: "Parcelas",
-          },
-          identificationType: {
-            id: "form-checkout__identificationType",
-            placeholder: "Tipo de documento",
-          },
-          identificationNumber: {
-            id: "form-checkout__identificationNumber",
-            placeholder: "Número do documento",
-          },
-          cardholderEmail: {
-            id: "form-checkout__cardholderEmail",
-            placeholder: "E-mail",
-          },
-        },
-        callbacks: {
-          onFormMounted: (error) => {
-            if (error)
-              return console.warn("Form Mounted handling error: ", error);
-            console.log("Form mounted");
-          },
-          onSubmit: async (event) => {
-            setIsLoading(true);
-            event.preventDefault();
+          callbacks: {
+            onFormMounted: (error) => {
+              if (error)
+                return console.warn("Form Mounted handling error: ", error);
+              console.log("Form mounted");
+            },
+            onSubmit: async (event) => {
+              setIsLoading(true);
+              event.preventDefault();
 
-            const {
-              paymentMethodId: payment_method_id,
-              issuerId: issuer_id,
-              cardholderEmail: email,
-              amount,
-              token,
-              installments,
-              identificationNumber,
-              identificationType,
-            } = cardForm.getCardFormData();
+              const {
+                paymentMethodId: payment_method_id,
+                issuerId: issuer_id,
+                cardholderEmail: email,
+                amount,
+                token,
+                installments,
+                identificationNumber,
+                identificationType,
+              } = cardForm.getCardFormData();
 
-            try {
-              const response = await fetch(
-                `${process.env.REACT_APP_API_URL}/api/create_preference`,
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    token,
-                    issuer_id,
-                    payment_method_id,
-                    transaction_amount: Number(amount),
-                    installments: Number(installments),
-                    description: "pagamento" + nomeCliente,
-                    payer: {
-                      email,
-                      identification: {
-                        type: identificationType,
-                        number: identificationNumber,
-                      },
+              try {
+                const response = await fetch(
+                  `${process.env.REACT_APP_API_URL}/api/create_preference`,
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
                     },
-                  }),
-                }
-              );
+                    body: JSON.stringify({
+                      token,
+                      issuer_id,
+                      payment_method_id,
+                      transaction_amount: Number(amount),
+                      installments: Number(installments),
+                      description: "pagamento" + nomeCliente,
+                      payer: {
+                        email,
+                        identification: {
+                          type: identificationType,
+                          number: identificationNumber,
+                        },
+                      },
+                    }),
+                  }
+                );
 
-              const result = await response.json();
-              setIsLoading(false);
-              onStatusCompra(result);
-              localStorage.setItem("approved", result);
-              console.log(result); // Verificar o status da compra
-            } catch (error) {
-              console.error("Erro ao processar o pagamento:", error);
-              setIsLoading(false);
-              onStatusCompra(error);
-            }
+                const result = await response.json();
+                setIsLoading(false);
+                onStatusCompra(result);
+                localStorage.setItem("approved", result);
+              } catch (error) {
+                console.error("Erro ao processar o pagamento:", error);
+                setIsLoading(false);
+                onStatusCompra(error);
+              }
+            },
+            onFetching: (resource) => {
+              console.log("Fetching resource: ", resource);
+
+              // Animate progress bar
+              const progressBar = document.querySelector(".progress-bar");
+              progressBar.removeAttribute("value");
+
+              return () => {
+                progressBar.setAttribute("value", "0");
+              };
+            },
           },
-          onFetching: (resource) => {
-            console.log("Fetching resource: ", resource);
+        });
+      };
 
-            // Animate progress bar
-            const progressBar = document.querySelector(".progress-bar");
-            progressBar.removeAttribute("value");
-
-            return () => {
-              progressBar.setAttribute("value", "0");
-            };
-          },
-        },
-      });
-    };
-    initializeCardForm();
-  }, [total]);
+      initializeCardForm();
+    }
+  }, [total, paymentMethod]);
 
   return (
     <>

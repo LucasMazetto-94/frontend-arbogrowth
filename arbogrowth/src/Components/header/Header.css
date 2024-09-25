@@ -4,49 +4,10 @@
     width: 100%;
     z-index: 1030;
   }
-  .navbar {
-    justify-content: center;
-  }
-  
-  .navbar-brand {
-    margin-right: 0; /* Remove margem direita */
-  }
-  
-  .navbar-nav {
-    flex-direction: row;
-    gap: 20px; /* Espaçamento entre itens da navbar */
-  }
-  
-  .navbar-toggler {
-    margin-left: auto;
-  }
-  
-  .navbar-collapse {
-    justify-content: center;
-  }
-  
-  .nav-link {
-    padding: 0.5rem 1rem; /* Ajuste o espaçamento interno */
-  }
 
   @media (max-width: 576px) {
     .navbar-nav {
       align-items: flex-end; /* Alinha o texto à direita */
-    }
-  
-    .navbar-toggler {
-      margin-left: 300px; /* Ajusta a posição do ícone de toggle */
-      margin-top: -55px;
-    }
-  
-    .navbar-collapse {
-      justify-content: flex-end; /* Alinha os itens do collapse à direita */
-      text-align: right; /* Alinha o texto dos links à direita */
-    }
-  
-    .badge {
-      top: -10px;
-      right: -10px; /* Ajuste para posicionar melhor o badge */
     }
   }
   

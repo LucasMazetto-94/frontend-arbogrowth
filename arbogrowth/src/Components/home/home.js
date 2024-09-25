@@ -54,13 +54,13 @@ const Home = () => {
     <div>
       {/* Hero Section */}
       <div className="hero-area hero-bg">
-        <div className="container">
+        <div className="">
           <div className="row">
             <div className="col-lg-9 col-md-12 col-sm-12 col-12 offset-lg-2 text-center">
               <div className="hero-text">
                 <div className="hero-text-tablecell">
                   <p className="subtitle">ArboGrowth</p>
-                  <h1 className="subtitle">Produtos de Jardinagem</h1>
+                  <h1 className="ms-3">Produtos de Jardinagem</h1>
                   <div className="hero-btns">
                     <Link to="/produtos" className="boxed-btn">
                       Produtos
@@ -207,26 +207,34 @@ const Home = () => {
         <Container className="container-xl">
           <Row>
             <Col lg={12} className="text-center">
-              <h5 className="fs-20">
+              <h3 className="fs-20">
                 Parceiros <span className="text-success">Arbo</span>Growth
-              </h5>
-              <div className="d-flex flex-wrap justify-content-center aligm-items-center mt-2 mb-4">
-                <div className="client-image me-5 mb-3 mt-2">
-                  <img
-                    src={beifort}
-                    alt="client-img"
-                    className="img-fluid"
-                    style={{ maxWidth: "150px", maxHeight: "80px" }}
-                  />
-                </div>
-                <div className="client-image mb-3">
-                  <img
-                    src={nutriplant}
-                    alt="client-img"
-                    className="img-fluid"
-                    style={{ maxWidth: "150px", maxHeight: "80px" }}
-                  />
-                </div>
+              </h3>
+              <div className="d-flex flex-wrap justify-content-center aligm-items-center mt-2 mb-4 me-3">
+                <div
+                  className="client-image mb-3 mt-2 me-3"
+                  style={{
+                    width: "150px",
+                    height: "100px",
+                    backgroundImage: `url(${beifort})`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                  }}
+                  alt="client-img"
+                />
+                <div
+                  className="client-image mb-3 ms-2"
+                  style={{
+                    width: "150px",
+                    height: "100px",
+                    backgroundImage: `url(${nutriplant})`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                  }}
+                  alt="client-img"
+                />
               </div>
             </Col>
           </Row>
