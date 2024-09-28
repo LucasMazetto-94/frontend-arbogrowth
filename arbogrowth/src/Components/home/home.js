@@ -60,12 +60,16 @@ const Home = () => {
               <div className="hero-text">
                 <div className="hero-text-tablecell">
                   <p
-                    // style={{ marginLeft: windowWidth > 530 ? "20px" : "80px" }}
+                    style={{ marginLeft: windowWidth > 530 ? "20px" : "10px" }}
                     className="subtitle"
                   >
                     ArboGrowth
                   </p>
-                  <h1>Produtos de Jardinagem</h1>
+                  <h1
+                    style={{ marginLeft: windowWidth > 530 ? "80px" : "10px" }}
+                  >
+                    Produtos de Jardinagem
+                  </h1>
                   <div className="hero-btns">
                     <a href="/produtos" className="boxed-btn">
                       Produtos
