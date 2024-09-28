@@ -60,7 +60,7 @@ const Home = () => {
               <div className="hero-text">
                 <div className="hero-text-tablecell">
                   <p
-                    style={{ marginLeft: windowWidth > 530 ? "20px" : "80px" }}
+                    // style={{ marginLeft: windowWidth > 530 ? "20px" : "80px" }}
                     className="subtitle"
                   >
                     ArboGrowth

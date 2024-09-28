@@ -1458,7 +1458,7 @@ html {
     line-height: 1.3;
     color: #fff;
     margin-right: 95px;
-    margin-left: 80px; 
+    /* margin-left: 80px;  */
   }
   
   .hero-area div {
