@@ -89,10 +89,22 @@ const Produtos = () => {
                 .map((item) => (
                   <div key={item.id} className="col-lg-4 col-md-6 text-center">
                     <div className="single-product-item">
-                      <div className="product-image">
-                        <a href="">
+                      <div
+                        style={{ maxHeight: "400px" }}
+                        className="product-image"
+                      >
+                        <Link
+                          to={`/detalhes/${item.id}`}
+                          state={{
+                            detalhes: item.detalhes,
+                            imagem: item.imagem,
+                            nome: item.nome,
+                            valor: item.valor,
+                            categoria: item.categoria,
+                          }}
+                        >
                           <img src={item.imagem} alt={item.nome} />
-                        </a>
+                        </Link>
                       </div>
                       <h3>{item.nome}</h3>
                       <p className="product-price">

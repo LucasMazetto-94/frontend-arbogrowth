@@ -26,7 +26,6 @@ const AdmProdutos = () => {
 
   const handleItem = (item) => {
     setSelectedItem(item);
-    console.log(item);
     toggle();
   };
 

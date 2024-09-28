@@ -59,12 +59,17 @@ const Home = () => {
             <div className="col-lg-9 col-md-12 col-sm-12 col-12 offset-lg-2 text-center">
               <div className="hero-text">
                 <div className="hero-text-tablecell">
-                  <p className="subtitle">ArboGrowth</p>
-                  <h1 className="ms-3">Produtos de Jardinagem</h1>
+                  <p
+                    style={{ marginLeft: windowWidth > 530 ? "20px" : "80px" }}
+                    className="subtitle"
+                  >
+                    ArboGrowth
+                  </p>
+                  <h1>Produtos de Jardinagem</h1>
                   <div className="hero-btns">
-                    <Link to="/produtos" className="boxed-btn">
+                    <a href="/produtos" className="boxed-btn">
                       Produtos
-                    </Link>
+                    </a>
                     <a
                       href="https://wa.me/5511940281896"
                       className="bordered-btn"

@@ -89,7 +89,7 @@ const Carrinho = () => {
   const handleShippingChange = (option) => {
     setSelectedShipping(option);
 
-    localStorage.setItem("shippingStorage", option.id);
+    // localStorage.setItem("shippingStorage", option.id);
 
     setShipping(option.custom_price);
     const subtotal = productsCart.reduce(

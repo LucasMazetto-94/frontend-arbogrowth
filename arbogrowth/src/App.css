@@ -530,7 +530,7 @@ html {
     position: absolute;
     z-index: 999;
     width: 100%;
-    padding: 20px 0;
+    padding: 10px 0;
   }
   
   .top-header-area.white ul.navbar-nav li.nav-item a.nav-link, .top-header-area.white ul.navbar-nav li.nav-item.active a.nav-link {
@@ -540,7 +540,7 @@ html {
   ul.navbar-nav li.nav-item a.nav-link, ul.navbar-nav li.nav-item.active a.nav-link {
     color: #fff;
     font-weight: 700;
-    margin-right: 20px;
+    margin-right: 40px;
   }
   
   a.navbar-brand img {
@@ -548,7 +548,7 @@ html {
   }
   
   nav.main-menu ul {
-    margin: 0;
+    margin-right: 0;
     padding: 0;
     list-style: none;
   }
@@ -1448,7 +1448,8 @@ html {
     text-transform: uppercase;
     letter-spacing: 7px;
     font-size: 15px;
-    margin-right: 150px;
+    margin-right: 100px;
+    
   }
   
   .hero-text h1 {
@@ -1457,6 +1458,7 @@ html {
     line-height: 1.3;
     color: #fff;
     margin-right: 95px;
+    margin-left: 80px; 
   }
   
   .hero-area div {
@@ -1482,7 +1484,7 @@ html {
   
   .hero-btns {
     margin-top: 35px;
-    margin-right: 160px;
+    margin-right: 100px;
   }
   
   .hero-btns a.bordered-btn {
@@ -2487,11 +2489,14 @@ html {
     margin-bottom: 30px;
   }
   
-  .product-image {
-    padding: 30px;
-    padding-bottom: 0;
+  
+    .product-image {
+      padding: 30px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
    
-  }
+
   
   .product-image img {
     width: 90%;

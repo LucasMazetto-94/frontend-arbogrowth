@@ -24,6 +24,7 @@ const ModalNovoProduto = ({ modal, toggle, item, buscarProdutos }) => {
   const [comprimento, setComprimento] = useState("");
   const [pesoProduto, setPesoProduto] = useState("");
   const [ativoProduto, setAtivoProduto] = useState(true);
+  const [detalhes, setDetalhes] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +37,6 @@ const ModalNovoProduto = ({ modal, toggle, item, buscarProdutos }) => {
         }
         const result = await response.json();
         setMeuTipo(result.result);
-        console.log(result);
       } catch (error) {
         console.log(error);
       }
@@ -53,7 +53,8 @@ const ModalNovoProduto = ({ modal, toggle, item, buscarProdutos }) => {
       setLarguraProduto(item.largura);
       setComprimento(item.comprimento);
       setPesoProduto(item.peso);
-      setAtivoProduto(item.ativo === 1); // Definir ativo/inativo ao editar
+      setAtivoProduto(item.ativo === 1);
+      setDetalhes(item.detalhes); // Definir ativo/inativo ao editar
 
       // Logica para definir o id do tipo do produto com base na string categoria
       const tipoCorrespondente = meuTipo.find(
@@ -77,6 +78,7 @@ const ModalNovoProduto = ({ modal, toggle, item, buscarProdutos }) => {
     formData.append("valor", valorProduto);
     formData.append("id_tipo_produto", tipoProduto);
     formData.append("ativo", ativoProduto ? 1 : 0); // Enviar estado ativo
+    formData.append("detalhes", detalhes);
 
     // Somente adicionar a imagem se uma nova foi selecionada
     if (imagemProduto) {
@@ -126,6 +128,7 @@ const ModalNovoProduto = ({ modal, toggle, item, buscarProdutos }) => {
     setLarguraProduto("");
     setComprimento("");
     setPesoProduto("");
+    setDetalhes("");
 
     toggle();
   };
@@ -221,7 +224,7 @@ const ModalNovoProduto = ({ modal, toggle, item, buscarProdutos }) => {
           </Row>
           <Row className="mb-3">
             <Col xs={12}>
-              <Label for="ativoProduto">Produto Ativo</Label>
+              <Label htmlFor="ativoProduto">Produto Ativo</Label>
               <div className="custom-switch">
                 <Input
                   type="checkbox"
@@ -230,10 +233,26 @@ const ModalNovoProduto = ({ modal, toggle, item, buscarProdutos }) => {
                   checked={ativoProduto}
                   onChange={(e) => setAtivoProduto(e.target.checked)}
                 />
-                <Label className="custom-control-label" for="ativoProduto">
+                <Label className="custom-control-label" htmlFor="ativoProduto">
                   {ativoProduto ? "Ativo" : "Inativo"}
                 </Label>
               </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Label for="detalhes" sm={2}>
+                Detalhes
+              </Label>
+              <Col sm={12}>
+                <Input
+                  id="detalhes"
+                  name="detalhes"
+                  type="textarea"
+                  onChange={(e) => setDetalhes(e.target.value)}
+                  value={detalhes}
+                />
+              </Col>
             </Col>
           </Row>
         </ModalBody>

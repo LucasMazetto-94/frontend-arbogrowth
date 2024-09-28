@@ -18,6 +18,20 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { productsCart } = useContext(CartContext);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -63,7 +77,9 @@ const Header = () => {
         <NavbarToggler className="mobile-show" onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav
-            className="fw-bolder main-menu"
+            className={`fw-bolder main-menu ${
+              windowWidth <= 530 ? "" : "me-2"
+            }`}
             style={{ fontSize: "18px" }}
             navbar
           >

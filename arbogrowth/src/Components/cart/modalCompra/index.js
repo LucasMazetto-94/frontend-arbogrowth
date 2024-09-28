@@ -48,6 +48,7 @@ const ModalCompra = ({
   const [dadosCep, setDadosCep] = useState("");
   const [generalApproved, setGeneralApproved] = useState("");
   const [shipping, setShipping] = useState(null);
+  const [useMercadoPago, setUseMercadoPago] = useState(true);
 
   const handleStatusCompra = (status) => {
     setStatusCompra(status);
@@ -59,7 +60,16 @@ const ModalCompra = ({
 
   const handlePaymentMethodChange = (method) => {
     setPaymentMethod(method);
+    if (method === "mercadoPago") {
+      setUseMercadoPago(true);
+    } else {
+      setUseMercadoPago(false);
+    }
   };
+
+  useEffect(() => {
+    handlePaymentMethodChange(paymentMethod);
+  }, [paymentMethod, handlePaymentMethodChange]);
 
   const [animationNavTab, setAnimationNavTab] = useState("1");
   const animationNavToggle = (tab) => {
@@ -68,11 +78,9 @@ const ModalCompra = ({
     }
   };
 
-  const savedShipping = localStorage.getItem("shippingStorage");
-
-  useEffect(() => {
-    setShipping(savedShipping);
-  }, [savedShipping]);
+  // useEffect(() => {
+  //   setShipping(savedShipping);
+  // }, [savedShipping]);
 
   // Efeito para mudar a aba automaticamente se o pagamento foi aprovado
   useEffect(() => {
@@ -134,7 +142,8 @@ const ModalCompra = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(shipping);
+    const savedShipping = localStorage.getItem("shippingStorage");
+    setShipping(savedShipping);
 
     const payload = {
       nome: shippingName,
@@ -454,24 +463,34 @@ const ModalCompra = ({
                 </Col>
               </Row>
 
-              {paymentMethod === "mercadoPago" ? (
+              <Row className="mt-3">
                 <Row className="mt-3">
-                  <Col lg={12}>
+                  <Col
+                    lg={12}
+                    style={{
+                      display:
+                        paymentMethod === "mercadoPago" ? "block" : "none",
+                    }}
+                  >
                     <CheckoutButton
                       total={total}
                       onStatusCompra={handleStatusCompra}
                       nomeCliente={nomeCompleto}
-                      paymentMethod={paymentMethod}
+                      shippingId={shippingId}
                     />
                   </Col>
-                </Row>
-              ) : (
-                <Row className="mt-3">
-                  <Col lg={12}>
+
+                  <Col
+                    lg={12}
+                    style={{
+                      display: paymentMethod === "pix" ? "block" : "none",
+                    }}
+                  >
                     <Pix total={total} onStatusPix={handleStatusPix} />
                   </Col>
                 </Row>
-              )}
+              </Row>
+
               <>
                 {(statusCompra === "approved" ||
                   statusPix === "approved" ||

@@ -10,6 +10,7 @@ import PrivateRoute from "./privateRoute";
 import MainLayout from "../Components/Layouts/mainLayout";
 import AdminLayout from "../Components/Layouts/adminLayout";
 import NovaSenha from "../Components/adminPages/novaSenha";
+import Details from "../Components/details";
 
 const MinhasRotas = () => {
   return (
@@ -43,6 +44,14 @@ const MinhasRotas = () => {
         element={
           <MainLayout>
             <Carrinho />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/detalhes/:id"
+        element={
+          <MainLayout>
+            <Details />
           </MainLayout>
         }
       />

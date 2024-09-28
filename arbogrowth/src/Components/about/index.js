@@ -26,6 +26,7 @@ const Sobre = () => {
         <div className="container">
           <Row className="pt-80" style={{ backgroundColor: "#f1f1f1" }}>
             <Col lg={6} md={12} className="pt-0">
+              <p class="top-sub">Inovação e Tecnologia</p>
               <h2 className="pb-3">
                 Por quê <span className="text-success">Arbogrowth</span>
               </h2>
